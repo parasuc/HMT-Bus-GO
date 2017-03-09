@@ -13,8 +13,8 @@ CREATE TABLE IF NOT EXISTS bus_line (
 	line_name VARCHAR(50) NOT NULL,
 	first_bus CHAR(5) NOT NULL,
 	last_bus CHAR(5) NOT NULL,
-	line_start INT UNSIGNED NOT NULL,
-	line_end INT UNSIGNED NOT NULL,
+	line_start VARCHAR(30) NOT NULL,
+	line_end VARCHAR(30) NOT NULL,
 	PRIMARY KEY (line_id),
 	INDEX (line_start),
 	INDEX (line_end)
@@ -25,7 +25,8 @@ CREATE TABLE IF NOT EXISTS bus_stop (
 	stop_name VARCHAR(50) NOT NULL,
 	stop_lng VARCHAR(50) DEFAULT NULL, -- 经度
 	stop_lat VARCHAR(50) DEFAULT NULL, -- 纬度
-	PRIMARY KEY (stop_id)
+	PRIMARY KEY (stop_id),
+	FULLTEXT (stop_name)
 ) ENGINE = MyISAM DEFAULT CHARSET = 'utf8';
 
 CREATE TABLE IF NOT EXISTS bus_relationship (
