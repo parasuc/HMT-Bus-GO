@@ -12,12 +12,13 @@
 		<meta http-equiv="Cache-Control" content="no-transform">
 		<meta http-equiv="Cache-Control" content="no-siteapp">
 		<title><?php $SCAUBus->Options->pageTitle(); ?></title>
+		<link rel="icon" type="image/x-icon" href="<?php $SCAUBus->Options->sourceUrl('img/favicon.jpg'); ?>">
 		<link rel="stylesheet" href="//fonts.lug.ustc.edu.cn/css?family=Work+Sans:300,400,700">
 		<link rel="stylesheet" href="<?php $SCAUBus->Options->sourceUrl('css/bootstrap.css'); ?>">
 		<link rel="stylesheet" href="<?php $SCAUBus->Options->sourceUrl('css/icons.css'); ?>">
 		<link rel="stylesheet" href="<?php $SCAUBus->Options->sourceUrl('css/jqui.css'); ?>">
 		<link rel="stylesheet" href="<?php $SCAUBus->Options->sourceUrl('css/nprogress.css'); ?>">
-		<link rel="stylesheet" href="<?php $SCAUBus->Options->sourceUrl('css/bus.css'); ?>">
+		<link rel="stylesheet" href="<?php $SCAUBus->Options->sourceUrl('css/common.css'); ?>">
 		<!--[if lt IE 9]>
 			<script src="<?php $SCAUBus->Options->sourceUrl('js/html5.js'); ?>"></script>
 			<script src="<?php $SCAUBus->Options->sourceUrl('js/respond.js'); ?>"></script>
@@ -28,7 +29,19 @@
 		<nav class="navbar navbar-default navbar-fixed-top">
 			<div id="progress-embeded" class="container-fluid">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="./index.php"><?php $SCAUBus->Options->sysName(); ?></a>
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="./index.php" data-pjax="no-pjax"><?php $SCAUBus->Options->sysName(); ?></a>
+				</div>
+				<div class="collapse navbar-collapse" id="navbar-collapse">
+					<nav class="nav navbar-nav">
+						<li><a href="./index.php" data-pjax="no-pjax"><span class="fa fa-home"></span> 首页</a></li>
+						<li><a href="./index.php?mod=lineindex"><span class="fa fa-code-fork"></span> 校巴线路查询</a></li>
+						<li><a href="./index.php?mod=stopindex"><span class="fa fa-map-marker"></span> 校巴站点查询</a></li>
+					</nav>
 				</div>
 			</div>
 		</nav>
