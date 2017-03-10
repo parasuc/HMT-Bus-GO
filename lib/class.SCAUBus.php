@@ -46,7 +46,9 @@ class SCAUBus {
 			case 'lineinfo': require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.LineInfo.php'; break;
 			case 'stopinfo': require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.StopInfo.php'; break;
 			case 'stopsearch': require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.StopSearch.php'; break;
-			default: require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.Main.php'; break;
+			case 'lineindex': require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.LineIndex.php'; break;
+			case 'stopindex': require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.StopIndex.php'; break;
+			default: require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.Homepage.php'; break;
 		}
 	}
 
