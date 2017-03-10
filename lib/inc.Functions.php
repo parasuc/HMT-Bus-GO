@@ -19,3 +19,13 @@ function __autoload($classname) {
 	$filename = LIB_ROOT . 'class.' . $classname . '.php';
 	require_once $filename;
 }
+
+/**
+ *	判断是否为pjax请求
+ *
+ *	@return bool
+ */
+
+function isPjax() {
+	return array_key_exists('HTTP_X_PJAX', $_SERVER) && $_SERVER['HTTP_X_PJAX'];
+}
