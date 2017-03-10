@@ -27,7 +27,7 @@
 		<script src="<?php $SCAUBus->Options->sourceUrl('js/jqui.js'); ?>"></script>
 		<script src="<?php $SCAUBus->Options->sourceUrl('js/pjax.js'); ?>"></script>
 		<script src="<?php $SCAUBus->Options->sourceUrl('js/nprogress.js'); ?>"></script>
-		<script src="<?php $SCAUBus->Options->sourceUrl('js/bus.js'); ?>"></script>
+		<script src="<?php $SCAUBus->Options->sourceUrl('js/common.php'); ?>"></script>
 		<!-- /scripts -->
 	</body>
 </html>
