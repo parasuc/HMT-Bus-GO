@@ -103,12 +103,30 @@ class BusData extends DB {
 	}
 
 	/**
-	 *	输出校巴站点列表 (供jQuery.autocomplete匹配站点名称使用)
+	 *	输出校巴站点列表
 	 *
 	 *	@return array
 	 */
 
 	public function getStopList() {
+		parent::query("SELECT stop_id, stop_name FROM bus_stop;");
+		$rows = array();
+		$i = 0;
+		while( $row = parent::fetchArray() ) {
+			$rows[$i] = $row;
+			$i++;
+		}
+		return $rows;
+
+	}
+
+	/**
+	 *	输出校巴站点名称 (供jQuery.autocomplete匹配站点名称使用)
+	 *
+	 *	@return array
+	 */
+
+	public function getStopName() {
 		parent::query("SELECT stop_name FROM bus_stop;");
 		$rows = array();
 		$i = 0;
