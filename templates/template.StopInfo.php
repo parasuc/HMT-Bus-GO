@@ -1,3 +1,7 @@
+				<div class="page-header">
+					<h3><span class="fa fa-map-marker"></span> 站点详情</h3>
+				</div>
+
 				<div class="panel panel-info">
 					<div class="panel-heading">
 						<h3 class="panel-title"><?php print $this->data['stop'][0]['stop_name']; ?>站</h3>
@@ -17,6 +21,6 @@
 						<h3 class="panel-title"><span class="fa fa-map-marker"></span> 站点位置</h3>
 					</div>
 					<div class="panel-body">
-						<p>//Tencent Map Canvas</p>
+						<div id="map">/* MAP CANVAS */</div>
 					</div>
 				</div>
