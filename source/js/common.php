@@ -2,9 +2,10 @@
 
 	function doActions() {
 
-		$('#stopName').autocomplete({source: './ajax/ajax.StopList.php'});
+		$('#stopName').autocomplete({source: './ajax/ajax.StopName.php'});
 
 		NProgress.configure({
+			showSpinner: false,
 			parent: '#progress-embeded',
 			speed: 400
 		});
@@ -24,6 +25,8 @@
 			});
 		});
 		$(document).on('pjax:send', function() {
+			$('#navbar-collapse').collapse({toggle: false});
+			$('#navbar-collapse').collapse('hide');
 			NProgress.start();
 		});
 		$(document).on('pjax:complete', function() {
