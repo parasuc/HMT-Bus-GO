@@ -12,7 +12,7 @@ header("Content-Type: application/json; charset=utf-8\n");
 
 require_once '../inc.Config.php';
 
-$rows = $SCAUBus->BusData->getStopList();
+$rows = $SCAUBus->BusData->getStopName();
 
 $total = count($rows);
 
