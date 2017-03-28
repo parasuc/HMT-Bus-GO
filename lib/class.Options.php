@@ -25,7 +25,7 @@ class Options {
 	 *	@var string
 	 */
 
-	public $sysName = '华农校巴查询程序';
+	public $sysName = 'SCAU Bus GO!';
 
 	/**
 	 *	程序作者

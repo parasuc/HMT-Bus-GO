@@ -14,7 +14,7 @@
 			<div class="noscript">
 				<div class="alert alert-warning">
 					<p><span class="fa fa-exclamation-circle"></span> 似乎您的浏览器没开启JavaScript呢。。。</p>
-					<p>校巴查询程序需要JavaScript才能正常运作哦~</p>
+					<p>SCAU Bus GO! 需要JavaScript才能正常运作哦~</p>
 					<p>请允许您的浏览器使用JavaScript，再重新载入此页面。</p>
 				</div>
 			</div>

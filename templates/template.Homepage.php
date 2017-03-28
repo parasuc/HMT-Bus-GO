@@ -30,7 +30,7 @@
 
 					<div class="masthead clearfix">
 						<div class="inner">
-							<h3 class="masthead-brand"><span class="fa fa-bus"></span> 华农校巴查询程序</h3>
+							<h3 class="masthead-brand"><span class="fa fa-bus"></span> SCAU Bus GO!</h3>
 							<nav>
 								<ul class="nav masthead-nav">
 									<li class="active"><a href="javascript:;"><span class="fa fa-home"></span> 首页</a></li>
@@ -78,7 +78,7 @@
 			<div class="noscript">
 				<div class="alert alert-warning">
 					<p><span class="fa fa-exclamation-circle"></span> 似乎您的浏览器没开启JavaScript呢。。。</p>
-					<p>校巴查询程序需要JavaScript才能正常运作哦~</p>
+					<p>SCAU Bus GO! 需要JavaScript才能正常运作哦~</p>
 					<p>请允许您的浏览器使用JavaScript，再重新载入此页面。</p>
 				</div>
 			</div>
