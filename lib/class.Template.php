@@ -27,7 +27,6 @@ class Template extends Options {
 	 */
 
 	public function need($template) {
-		global $SCAUBus;
 		$file = $this->templateRoot . 'template.' . $template . '.php';
 		if (!file_exists($file)) {
 			throw new Error('未找到模板"' . $template . '"，请检查模板文件是否存在。');
