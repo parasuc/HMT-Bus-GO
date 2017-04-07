@@ -35,4 +35,78 @@ class Template extends Options {
 		}
 	}
 
+	/**
+	 *	输出基于Source Url的资源路径
+	 *
+	 *	@param string $pathInfo [路径/资源名]
+	 *	@return void
+	 */
+
+	public function sourceUrl($pathInfo = NULL) {
+		print $this->sourceUrl . '/' . $pathInfo;
+	}
+
+	/**
+	 *	输出基于Site Url的资源路径
+	 *
+	 *	@param string $pathInfo [路径/资源名]
+	 *	@return void
+	 */
+
+	public function siteUrl($pathInfo = NULL) {
+		print $this->siteUrl . $pathInfo;
+	}
+
+	/**
+	 *	输出程序名称
+	 *
+	 *	@return void
+	 */
+
+	public function sysName() {
+		print $this->sysName;
+	}
+
+	/**
+	 *	输出页面标题
+	 *
+	 *
+	 *	@return void
+	 */
+
+	public function pageTitle() {
+		if ($this->pageTitle == NULL) {
+			print $this->sysName;
+		} else {
+			print $this->pageTitle . ' - ' . $this->sysName;
+		}
+	}
+
+	/**
+	 *	设置页面标题
+	 *
+	 *	@param string $title [页面标题]
+	 *	@return void
+	 */
+
+	public function setPageTitle($title) {
+		if (empty($title)) {
+			throw new Error('页面标题不能为空。');
+		} else {
+			$this->pageTitle = $title;
+		}
+	}
+
+	/**
+	 *	输出版权信息
+	 *
+	 *	@return void
+	 */
+
+	public function copyright() {
+		print '<p>' . $this->sysName . ' v' . $this->sysVersion . '.</p>';
+		print '<p>实时校巴数据由' . $this->dataProvider . '提供.</p>';
+		print '<p>Powered by ' . $this->sysAuthor . '. Proudly hosted by ' . $this->serverProvider . '.</p>';
+	}
+
 }
