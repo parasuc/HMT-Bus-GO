@@ -16,11 +16,11 @@
 					</div>
 				</div>
 
-				<div class="panel panel-default">
+				<!--<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title"><span class="fa fa-map-marker"></span> 站点位置</h3>
 					</div>
 					<div class="panel-body">
 						<div id="map">/* MAP CANVAS */</div>
 					</div>
-				</div>
+				</div>-->

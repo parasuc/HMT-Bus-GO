@@ -11,7 +11,6 @@
 
 class BusData extends DB {
 
-
 	/**
 	 *	输出校巴线路列表
 	 *

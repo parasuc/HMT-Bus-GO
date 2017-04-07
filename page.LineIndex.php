@@ -8,14 +8,16 @@
  *	@note 线路列表页
  */
 
+$this->Template->setPageTitle('校巴线路查询');
+
 /* 加载线路数据 */
-$rows = $SCAUBus->BusData->getLineList();
+$rows = $this->BusData->getLineList();
 $total = count($rows);
 
 /* 把数据挂载到data数组上 */
-$SCAUBus->Template->data['rows'] = $rows;
-$SCAUBus->Template->data['total'] = $total;
+$this->Template->data['rows'] = $rows;
+$this->Template->data['total'] = $total;
 
-$SCAUBus->Template->need('Header');
-$SCAUBus->Template->need('LineIndex');
-$SCAUBus->Template->need('Footer');
+$this->Template->need('Header');
+$this->Template->need('LineIndex');
+$this->Template->need('Footer');

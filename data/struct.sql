@@ -37,3 +37,11 @@ CREATE TABLE IF NOT EXISTS bus_relationship (
 	INDEX (stop_id),
 	INDEX (stop_sort)
 ) ENGINE = MyISAM DEFAULT CHARSET = 'utf8';
+
+CREATE TABLE IF NOT EXISTS bus_keywords (
+	key_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	key_name TEXT NOT NULL,
+	line_id INT UNSIGNED NOT NULL,
+	PRIMARY KEY (key_id),
+	INDEX (line_id)
+) ENGINE = MyISAM DEFAULT CHARSET = 'utf8';

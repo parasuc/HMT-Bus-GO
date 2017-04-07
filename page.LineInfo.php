@@ -8,7 +8,7 @@
  *	@note 线路详情页
  */
 
-$SCAUBus->Options->setPageTitle('线路详情');
+$this->Template->setPageTitle('线路详情');
 
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
 	throw new Error('传入线路ID有误');
@@ -17,15 +17,15 @@ if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
 
 /* 加载线路数据 */
 $id = $_GET['id'];
-$line = $SCAUBus->BusData->getLineDetail($id);
-$stops = $SCAUBus->BusData->getStopByLineId($id);
+$line = $this->BusData->getLineDetail($id);
+$stops = $this->RealTimeBus->getDataByLineId($id);
 $totalStops = count($stops);
 
 /* 把数据挂载到data数组上 */
-$SCAUBus->Template->data['line'] = $line;
-$SCAUBus->Template->data['stops'] = $stops;
-$SCAUBus->Template->data['totalStops'] = $totalStops;
+$this->Template->data['line'] = $line;
+$this->Template->data['stops'] = $stops;
+$this->Template->data['totalStops'] = $totalStops;
 
-$SCAUBus->Template->need('Header');
-$SCAUBus->Template->need('LineInfo');
-$SCAUBus->Template->need('Footer');
+$this->Template->need('Header');
+$this->Template->need('LineInfo');
+$this->Template->need('Footer');

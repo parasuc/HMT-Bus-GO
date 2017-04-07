@@ -1,0 +1,184 @@
+<?php
+/**
+ *	SCAU Bus GO -- 华农校巴查询程序
+ *
+ *	@author CRH380A-2722 <609657831@qq.com>
+ *	@copyright 2016-2017 CRH380A-2722
+ *	@license MIT
+ *	@note 实时校巴查询类
+ *	@package Curl
+ */
+
+class RealTimeBus extends Curl {
+
+	/**
+	 *	实时校巴原始数据存储对象
+	 *
+	 *	@var array
+	 */
+
+	private $raw = array();
+
+	/**
+	 *	实时校巴处理后数据存储对象
+	 *
+	 *	@var array
+	 */
+
+	private $computed = array();
+
+	/**
+	 *	内部数据库实例存储对象
+	 *
+	 *	@var object
+	 */
+
+	private $db;
+
+	/**
+	 *	构造函数
+	 *
+	 *	@return void
+	 */
+
+	public function __construct() {
+		$this->db = new DB();
+		$this->raw = json_decode($this->getRawData(), true);
+		$this->compute();
+	}
+
+	/**
+	 *	获取实时校巴原始数据
+	 *
+	 *	@return string
+	 */
+
+	private function getRawData() {
+		return parent::post( RTB_DATA_URL, 'ids=' . urlencode(RTB_DATA_BUSID) );
+	}
+
+	/**
+	 *	处理实时校巴数据，保留所需的部分
+	 *
+	 *	@return void
+	 */
+
+	private function compute() {
+
+		for ($i = 0; $i < count($this->raw['data']); $i++) {
+			$this->computed[] = array(
+				'IS_ONLINE' => $this->raw['data'][$i]['isol'],
+				'BUS_NUM' => $this->raw['data'][$i]['carnum'],
+				'LINE_NAME' => $this->raw['data'][$i]['linename'],
+				'LINE_ID' => $this->getLineId($this->raw['data'][$i]['linename']),
+				'CURRENT_STOP_NAME' => $this->raw['data'][$i]['cursname'],
+				'CURRENT_STOP_ID' => $this->getStopId($this->raw['data'][$i]['cursname']),
+				'NEXT_STOP_NAME' => $this->raw['data'][$i]['nextsname'],
+				'POSITION_LNG' => $this->raw['data'][$i]['lng'],
+				'POSITION_LAT' => $this->raw['data'][$i]['lat'],
+				'UPDATE_TIME' => $this->raw['data'][$i]['gtime']
+			);
+		}
+
+	}
+
+	/**
+	 *	获取处理过的实时校巴数据
+	 *
+	 *	@return array
+	 */
+
+	public function getData() {
+		return $this->computed;
+	}
+
+	/**
+	 *	获取当前站点ID
+	 *
+	 *	@param string $stopName [当前站点名称]
+	 *	@return int
+	 */
+
+	private function getStopId($stopName) {
+		$this->db->query("SELECT stop_id FROM bus_stop WHERE stop_name = '{$stopName}' LIMIT 1;");
+		if ($this->db->numRows() != 0) {
+			$row = $this->db->fetchArray();
+			return $row['stop_id'];
+		} else {
+			return 0;
+		}
+	}
+
+	/**
+	 *	获取当前线路ID
+	 *
+	 *	@param string $lineName [当前线路名称]
+	 *	@return int
+	 */
+
+	private function getLineId($lineName) {
+		$this->db->query("SELECT line_id FROM bus_keywords WHERE key_name = '{$lineName}' LIMIT 1;");
+		if ($this->db->numRows() != 0) {
+			$row = $this->db->fetchArray();
+			return $row['line_id'];
+		} else {
+			return 0;
+		}
+	}
+
+	/**
+	 *	根据线路ID获取实时数据
+	 *
+	 *	@param int $lineId [线路ID]
+	 *	@return array
+	 */
+
+	public function getDataByLineId($lineId) {
+		$this->db->query("SELECT s.stop_id, s.stop_name, r.stop_sort FROM bus_stop AS s LEFT JOIN bus_relationship AS r USING (stop_id) LEFT JOIN bus_line AS l USING (line_id) WHERE line_id = {$lineId} ORDER BY stop_sort ASC;");
+		$rows = array();
+		$i = 0;
+		while( $row = $this->db->fetchArray() ) {
+			$rows[$i] = $row;
+			$rows[$i]['have_bus'] = 0;
+			$i++;
+		}
+		for ($j = 0; $j < count($this->computed); $j++) {
+			$lid = $this->computed[$j]['LINE_ID'];
+			$sid = $this->computed[$j]['CURRENT_STOP_ID'];
+			if ($lid == $lineId) {
+				for ($k = 0; $k < count($rows); $k++) {
+					if ($rows[$k]['stop_id'] == $sid) {
+						$rows[$k]['have_bus']++;
+					}
+				}
+			}
+		}
+		return $rows;
+	}
+
+	/**
+	 *	筛选在线/离线终端
+	 *
+	 *	@param bool $status [终端状态 (1=在线, 0=离线)]
+	 *	@return array
+	 */
+
+	public function getDevice($status) {
+		$devices = array();
+		if ($status) {
+			for ($a = 0; $a < count($this->computed); $a++) {
+				if ($this->computed[$a]['IS_ONLINE']) {
+					$devices[] = $this->computed[$a];
+				}
+			}
+		} else {
+			for ($b = 0; $b < count($this->computed); $b++) {
+				if (!$this->computed[$b]['IS_ONLINE']) {
+					$devices[] = $this->computed[$b];
+				}
+			}
+		}
+		return $devices;
+	}
+
+}

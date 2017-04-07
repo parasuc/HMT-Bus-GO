@@ -17,20 +17,29 @@ class SCAUBus {
 	 *	@var object
 	 */
 
-	public $BusData, $DB, $Options, $Template;
+	public $BusData, $Options, $Template, $RealTimeBus;
 
 	/**
 	 *	构造函数
 	 *
-	 *	@note 实例化所有对象
 	 *	@return void
 	 */
 
 	public function __construct() {
+		$this->getInstance();
+		$this->BusData->realTimeBus = $this->RealTimeBus->getData();
+	}
+
+	/**
+	 *	获取必须的实例
+	 *
+	 *	@return void
+	 */
+
+	public function getInstance() {
 		//实例化也是有优先级的
-		$this->Options = new Options();
-		$this->DB = new DB();
 		$this->BusData = new BusData();
+		$this->RealTimeBus = new RealTimeBus();
 		$this->Template = new Template();
 	}
 
@@ -41,19 +50,19 @@ class SCAUBus {
 	 */
 
 	public function router() {
-		global $SCAUBus;
 		switch(@$_GET['mod']) {
-			case 'lineinfo': require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.LineInfo.php'; break;
-			case 'stopinfo': require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.StopInfo.php'; break;
-			case 'stopsearch': require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.StopSearch.php'; break;
-			case 'lineindex': require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.LineIndex.php'; break;
-			case 'stopindex': require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.StopIndex.php'; break;
-			default: require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.Homepage.php'; break;
+			case 'lineinfo':		require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.LineInfo.php';			break;
+			case 'stopinfo':		require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.StopInfo.php';			break;
+			case 'stopsearch':		require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.StopSearch.php';		break;
+			case 'lineindex':		require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.LineIndex.php';		break;
+			case 'stopindex':		require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.StopIndex.php';		break;
+			case 'realtimestatus':	require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.RealTimeStatus.php';	break;
+			default:				require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.Homepage.php';			break;
 		}
 	}
 
 	/**
-	 *	运转吧，校巴查询程序！
+	 *	转动命运之轮吧, SCAU Bus GO!
 	 *
 	 *	@return void
 	 */

@@ -8,14 +8,16 @@
  *	@note 站点搜索及列表页
  */
 
+$this->Template->setPageTitle('校巴站点查询');
+
 /* 加载站点数据 */
-$rows = $SCAUBus->BusData->getStopList();
+$rows = $this->BusData->getStopList();
 $total = count($rows);
 
 /* 把数据挂载到data数组上 */
-$SCAUBus->Template->data['rows'] = $rows;
-$SCAUBus->Template->data['total'] = $total;
+$this->Template->data['rows'] = $rows;
+$this->Template->data['total'] = $total;
 
-$SCAUBus->Template->need('Header');
-$SCAUBus->Template->need('StopIndex');
-$SCAUBus->Template->need('Footer');
+$this->Template->need('Header');
+$this->Template->need('StopIndex');
+$this->Template->need('Footer');
