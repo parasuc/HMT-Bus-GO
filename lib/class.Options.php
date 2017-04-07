@@ -68,75 +68,19 @@ class Options {
 	public $templateRoot = BASE_ROOT . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR;
 
 	/**
-	 *	输出基于Source Url的资源路径
+	 *	Data Provider
 	 *
-	 *	@param string $pathInfo [路径/资源名]
-	 *	@return void
+	 *	@var string
 	 */
 
-	public function sourceUrl($pathInfo = NULL) {
-		print $this->sourceUrl . '/' . $pathInfo;
-	}
+	public $dataProvider = '佳华利道公司';
 
 	/**
-	 *	输出基于Site Url的资源路径
+	 *	Server Provider
 	 *
-	 *	@param string $pathInfo [路径/资源名]
-	 *	@return void
+	 *	@var string
 	 */
 
-	public function siteUrl($pathInfo = NULL) {
-		print $this->siteUrl . $pathInfo;
-	}
-
-	/**
-	 *	输出程序名称
-	 *
-	 *	@return void
-	 */
-
-	public function sysName() {
-		print $this->sysName;
-	}
-
-	/**
-	 *	输出页面标题
-	 *
-	 *
-	 *	@return void
-	 */
-
-	public function pageTitle() {
-		if ($this->pageTitle == NULL) {
-			print $this->sysName;
-		} else {
-			print $this->pageTitle . ' - ' . $this->sysName;
-		}
-	}
-
-	/**
-	 *	设置页面标题
-	 *
-	 *	@param string $title [页面标题]
-	 *	@return void
-	 */
-
-	public function setPageTitle($title) {
-		if (empty($title)) {
-			throw new Error('页面标题不能为空。');
-		} else {
-			$this->pageTitle = $title;
-		}
-	}
-
-	/**
-	 *	输出版权信息
-	 *
-	 *	@return void
-	 */
-
-	public function copyright() {
-		print $this->sysName . ' v' . $this->sysVersion . ' by ' . $this->sysAuthor . '.';
-	}
+	public $serverProvider = '红满堂工作室';
 
 }
