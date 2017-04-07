@@ -14,20 +14,14 @@ MIT License
 
 ## 鸣谢
 
-SAE (Sina App Engine) 提供的网站空间
+* SAE (Sina App Engine) 提供的网站空间
 
-GitHub提供的代码仓库
+* GitHub提供的代码仓库
 
-佳华利道公司提供的校巴数据
+* 佳华利道公司提供的校巴数据
 
 ## TODO
 
-* 加入腾讯地图API
-
-* 加入实时校巴查询功能
-
-* 完善异常处理类
-
-* 美化页面
+* 加入高德地图API
 
 * 修复各种BUG

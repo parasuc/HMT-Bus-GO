@@ -8,4 +8,4 @@
  *	@note 首页
  */
 
-$SCAUBus->Template->need('Homepage');
+$this->Template->need('Homepage');

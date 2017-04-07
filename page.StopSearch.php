@@ -8,16 +8,16 @@
  *	@note 站点搜索页
  */
 
-$SCAUBus->Options->setPageTitle('站点检索');
+$this->Template->setPageTitle('站点检索');
 
 /* 加载线路数据 */
-$rows = $SCAUBus->BusData->getStopListByName(urldecode($_GET['name']));
+$rows = $this->BusData->getStopListByName(urldecode($_GET['name']));
 $total = count($rows);
 
 /* 把数据挂载到data数组上 */
-$SCAUBus->Template->data['rows'] = $rows;
-$SCAUBus->Template->data['total'] = $total;
+$this->Template->data['rows'] = $rows;
+$this->Template->data['total'] = $total;
 
-$SCAUBus->Template->need('Header');
-$SCAUBus->Template->need('StopSearch');
-$SCAUBus->Template->need('Footer');
+$this->Template->need('Header');
+$this->Template->need('StopSearch');
+$this->Template->need('Footer');

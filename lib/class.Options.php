@@ -36,14 +36,6 @@ class Options {
 	public $sysAuthor = 'CRH380A-2722';
 
 	/**
-	 *	系统管理员Email
-	 *
-	 *	@var string
-	 */
-
-	public $adminEmail = ADMIN_EMAIL;
-
-	/**
 	 *	页面标题
 	 *
 	 *	@var string
