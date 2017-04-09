@@ -40,7 +40,7 @@
 						</div>
 						<ul class="list-group">
 							<li class="list-group-item"><strong>终端状态:</strong> <span class="text-danger">离线</span></li>
-							<li class="list-group-item"><strong>GPS最后更新时间:</strong> <?php print $this->data['online'][$j]['UPDATE_TIME']; ?></li>
+							<li class="list-group-item"><strong>GPS最后更新时间:</strong> <?php print $this->data['offline'][$j]['UPDATE_TIME']; ?></li>
 						</ul>
 					</div>
 				</div>
