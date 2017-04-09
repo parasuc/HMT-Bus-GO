@@ -134,7 +134,7 @@ class RealTimeBus extends Curl {
 	 */
 
 	public function getDataByLineId($lineId) {
-		$this->db->query("SELECT s.stop_id, s.stop_name, r.stop_sort FROM bus_stop AS s LEFT JOIN bus_relationship AS r USING (stop_id) LEFT JOIN bus_line AS l USING (line_id) WHERE line_id = {$lineId} ORDER BY stop_sort ASC;");
+		$this->db->query("SELECT s.stop_id, s.stop_name, s.stop_alias, r.stop_sort FROM bus_stop AS s LEFT JOIN bus_relationship AS r USING (stop_id) LEFT JOIN bus_line AS l USING (line_id) WHERE line_id = {$lineId} ORDER BY stop_sort ASC;");
 		$rows = array();
 		$i = 0;
 		while( $row = $this->db->fetchArray() ) {
@@ -142,10 +142,25 @@ class RealTimeBus extends Curl {
 			$rows[$i]['have_bus'] = 0;
 			$i++;
 		}
-		for ($j = 0; $j < count($this->computed); $j++) {
-			$lid = $this->computed[$j]['LINE_ID'];
-			$sid = $this->computed[$j]['CURRENT_STOP_ID'];
+		$online = array();
+		foreach ($this->computed as $ol) {
+			if ($ol['IS_ONLINE']) {
+				$online[] = $ol;
+			}
+		}
+		foreach ($online as $online) {
+			$lid = $online['LINE_ID'];
+			$sid = $online['CURRENT_STOP_ID'];
+			$name = $online['CURRENT_STOP_NAME'];
 			if ($lid == $lineId) {
+				/* 对于站点ID ($sid) 为0的终端，首先确定其sid */
+				if ($sid == 0) {
+					foreach ($rows as $row) {
+						if ( stripos($row['stop_alias'], $name) !== false ) {
+							$sid = $row['stop_id'];
+						}
+					}
+				}
 				for ($k = 0; $k < count($rows); $k++) {
 					if ($rows[$k]['stop_id'] == $sid) {
 						$rows[$k]['have_bus']++;
