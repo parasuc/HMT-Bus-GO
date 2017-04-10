@@ -68,14 +68,6 @@ class Options {
 	public $templateRoot = BASE_ROOT . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR;
 
 	/**
-	 *	Data Provider
-	 *
-	 *	@var string
-	 */
-
-	public $dataProvider = '佳华利道公司';
-
-	/**
 	 *	Server Provider
 	 *
 	 *	@var string
