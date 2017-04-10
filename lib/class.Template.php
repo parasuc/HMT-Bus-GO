@@ -104,9 +104,8 @@ class Template extends Options {
 	 */
 
 	public function copyright() {
-		print '<p>' . $this->sysName . ' v' . $this->sysVersion . '.</p>';
-		print '<p>实时校巴数据由' . $this->dataProvider . '提供.</p>';
-		print '<p>Powered by ' . $this->sysAuthor . '. Proudly hosted by ' . $this->serverProvider . '.</p>';
+		print '<p>' . $this->sysName . ' v' . $this->sysVersion . ' by ' . $this->sysAuthor . '.</p>';
+		print '<p>Proudly hosted by ' . $this->serverProvider . '.</p>';
 	}
 
 }
