@@ -48,5 +48,6 @@
 		</nav>
 
 		<div class="container">
-			<div class="col-sm-2 hidden-xs"></div>
-			<div class="col-sm-8" id="pjax">
+			<div class="row">
+				<div class="col-sm-2 hidden-xs"></div>
+				<div class="col-sm-8" id="pjax">
