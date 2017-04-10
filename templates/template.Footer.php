@@ -1,5 +1,6 @@
+				</div>
+				<div class="col-sm-2 hidden-xs"></div>
 			</div>
-			<div class="col-sm-2 hidden-xs"></div>
 		</div>
 		<!-- /.container -->
 
