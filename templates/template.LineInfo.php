@@ -15,7 +15,7 @@
 
 				<div class="panel panel-success">
 					<div class="panel-heading">
-						<h3 class="panel-title"><span class="fa fa-road"></span> 途径站点（顺序从上到下）</h3>
+						<h3 class="panel-title"><span class="fa fa-road"></span> 途经站点（顺序从上到下）</h3>
 					</div>
 					<div class="list-group" id="stop-list">
 					<?php for ($i = 0; $i < $this->data['totalStops']; $i++): ?>
