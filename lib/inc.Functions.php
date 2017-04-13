@@ -21,11 +21,13 @@ function __autoload($classname) {
 }
 
 /**
- *	判断是否为pjax请求
+ *	CNZZ 站点统计函数
  *
- *	@return bool
+ *	@param int $siteId
+ *	@return void
  */
 
-function isPjax() {
-	return array_key_exists('HTTP_X_PJAX', $_SERVER) && $_SERVER['HTTP_X_PJAX'];
+function cnzzTrackPageView($siteId) {
+    $cs = new CS($siteId);
+    return $cs->trackPageView();
 }
