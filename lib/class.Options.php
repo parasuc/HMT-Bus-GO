@@ -36,6 +36,14 @@ class Options {
 	public $sysAuthor = 'CRH380A-2722';
 
 	/**
+	 *	程序作者主页
+	 *
+	 *	@var string
+	 */
+
+	public $sysAuthorUrl = 'http://weibo.com/zsQyBus';
+
+	/**
 	 *	页面标题
 	 *
 	 *	@var string
@@ -74,5 +82,13 @@ class Options {
 	 */
 
 	public $serverProvider = '红满堂工作室';
+
+	/**
+	 *	Server Provider URL
+	 *
+	 *	@var string
+	 */
+
+	public $serverProviderUrl = 'http://hometown.scau.edu.cn/official/';
 
 }
