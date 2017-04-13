@@ -64,6 +64,7 @@
 					</div>
 
 					<div class="mastfoot">
+						<?php print '<img src="' . cnzzTrackPageView(1261727231) . '" width="0" height="0">'; ?>
 						<div class="inner">
 							<p><?php $this->copyright(); ?></p>
 						</div>
