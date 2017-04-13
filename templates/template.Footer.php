@@ -6,6 +6,7 @@
 
 		<!-- .footer -->
 		<div class="footer">
+			<?php print '<img src="' . cnzzTrackPageView(1261727231) . '" width="0" height="0">'; ?>
 			<p><?php $this->copyright(); ?></p>
 		</div>
 		<!-- /.footer -->
