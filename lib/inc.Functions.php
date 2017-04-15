@@ -28,6 +28,6 @@ function __autoload($classname) {
  */
 
 function cnzzTrackPageView($siteId) {
-    $cs = new CS($siteId);
-    return $cs->trackPageView();
+	$cs = new CS($siteId);
+	return $cs->trackPageView();
 }
