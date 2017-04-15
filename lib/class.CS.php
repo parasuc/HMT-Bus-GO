@@ -37,7 +37,8 @@ class CS {
      * @return String
      */
     private function getScheme() {
-        return (isset($_SERVER["HTTPS"]) && ($_SERVER["HTTPS"] !== "off") ? 'https://' : 'http://');
+        //return (isset($_SERVER["HTTPS"]) && ($_SERVER["HTTPS"] !== "off") ? 'https://' : 'http://');
+        return 'https://';
     }
 
     /**
