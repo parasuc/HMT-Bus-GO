@@ -30,10 +30,10 @@
 
 					<div class="masthead clearfix">
 						<div class="inner">
-							<h3 class="masthead-brand"><span class="fa fa-bus"></span> <?php $this->sysName(); ?></h3>
-							<nav>
+							<h3 class="masthead-brand"><?php $this->sysName(); ?></h3>
+							<nav class="hidden-xs">
 								<ul class="nav masthead-nav">
-									<li class="active"><a href="javascript:;"><span class="fa fa-home"></span> 首页</a></li>
+									<li class="active"><a href="javascript:;" id="home"><span class="fa fa-home"></span> 首页</a></li>
 									<li><a href="./index.php?mod=lineindex"><span class="fa fa-code-fork"></span> 线路查询</a></li>
 									<li><a href="./index.php?mod=stopindex"><span class="fa fa-map-marker"></span> 站点查询</a></li>
 									<li><a href="./index.php?mod=realtimestatus"><span class="fa fa-clock-o"></span> 实时状态</a></li>
@@ -42,16 +42,25 @@
 						</div>
 					</div>
 
-					<div class="inner cover">
+					<div id="introduction" class="inner cover">
 						<h1 class="cover-heading">校巴，我们走！</h1>
 						<p class="lead"></p>
 						<p class="lead">校巴信息实时更新，随时随地掌握校巴动态，</p>
 						<p class="lead">让您更便捷地搭乘校巴。</p>
 					</div>
 
+					<div id="mode-hint" class="inner cover">
+						<h2 class="cover-heading">请选择一种查询方式</h2>
+						<p>Please select a mode</p>
+					</div>
+
 					<br><br>
 
-					<div class="inner cover">
+					<div id="start" class="inner cover">
+						<button id="start-btn" class="btn btn-lg btn-default" type="button"><span class="fa fa-bus"></span> 让我们开始吧</button>
+					</div>
+
+					<div id="modes" class="inner cover">
 						<div class="col-sm-4">
 							<p class="lead"><a href="./index.php?mod=lineindex" class="btn btn-lg btn-default"><span class="fa fa-code-fork"></span> 查询校巴线路</a></p>
 						</div>
