@@ -1,6 +1,6 @@
 <?php
 /**
- *	SCAU Bus GO -- 华农校巴查询程序
+ *	HMT Bus GO -- 华农校巴查询程序
  *
  *	@author CRH380A-2722 <609657831@qq.com>
  *	@copyright 2016-2017 CRH380A-2722
@@ -13,13 +13,13 @@
 //这里请根据你的数据库配置来填写
 
 //数据库服务器地址
-define("DB_HOST", 'localhost');
+define("DB_HOST", '');
 //数据库用户名
-define("DB_USER", 'root');
+define("DB_USER", '');
 //数据库登录密码
 define("DB_PASS", '');
 //数据库名称
-define("DB_NAME", 'scaubus');
+define("DB_NAME", '');
 
 //##########################################//
 
