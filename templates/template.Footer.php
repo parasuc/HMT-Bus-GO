@@ -1,5 +1,5 @@
 				</div>
-				<div class="col-sm-2 hidden-xs"></div>
+				<div class="col-sm-1 hidden-xs"></div>
 			</div>
 		</div>
 		<!-- /.container -->
