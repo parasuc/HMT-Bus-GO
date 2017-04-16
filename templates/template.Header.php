@@ -42,6 +42,7 @@
 						<li><a href="./index.php?mod=lineindex"><span class="fa fa-code-fork"></span> 校巴线路查询</a></li>
 						<li><a href="./index.php?mod=stopindex"><span class="fa fa-map-marker"></span> 校巴站点查询</a></li>
 						<li><a href="./index.php?mod=realtimestatus"><span class="fa fa-clock-o"></span> 实时校巴状态</a></li>
+						<li><a href="http://hometown.scau.edu.cn:8081/advice/bus" target="_blank"><span class="fa fa-envelope"></span> 意见反馈</a></li>
 					</nav>
 				</div>
 			</div>
@@ -49,5 +50,5 @@
 
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-2 hidden-xs"></div>
-				<div class="col-sm-8" id="pjax">
+				<div class="col-sm-1 hidden-xs"></div>
+				<div class="col-sm-10" id="pjax">
