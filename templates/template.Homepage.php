@@ -43,7 +43,7 @@
 					</div>
 
 					<div id="introduction" class="inner cover">
-						<h1 class="cover-heading">校巴，我们走！</h1>
+						<h1 class="cover-heading">校巴，我们走</h1>
 						<p class="lead"></p>
 						<p class="lead">校巴信息实时更新，随时随地掌握校巴动态，</p>
 						<p class="lead">让您更便捷地搭乘校巴。</p>
