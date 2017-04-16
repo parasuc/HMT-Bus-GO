@@ -36,7 +36,7 @@ class SCAUBus {
 	 *	@return void
 	 */
 
-	public function getInstance() {
+	private function getInstance() {
 		//实例化也是有优先级的
 		$this->BusData = new BusData();
 		$this->RealTimeBus = new RealTimeBus();
@@ -49,7 +49,7 @@ class SCAUBus {
 	 *	@return void
 	 */
 
-	public function router() {
+	private function router() {
 		switch(@$_GET['mod']) {
 			case 'lineinfo':		require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.LineInfo.php';			break;
 			case 'stopinfo':		require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.StopInfo.php';			break;
