@@ -14,10 +14,10 @@ class RealTimeBus extends Curl {
 	/**
 	 *	实时校巴原始数据存储对象
 	 *
-	 *	@var array
+	 *	@var string
 	 */
 
-	private $raw = array();
+	private $raw;
 
 	/**
 	 *	实时校巴处理后数据存储对象
@@ -43,18 +43,23 @@ class RealTimeBus extends Curl {
 
 	public function __construct() {
 		$this->db = new DB();
-		$this->raw = json_decode($this->getRawData(), true);
+		/* 判断实时数据缓存是否过期 */
+		if ($this->cacheIsExpired()) {
+			$this->putCache();
+		} else {
+			$this->getCache();
+		}
 		$this->compute();
 	}
 
 	/**
 	 *	获取实时校巴原始数据
 	 *
-	 *	@return string
+	 *	@return void
 	 */
 
 	private function getRawData() {
-		return parent::post( RTB_DATA_URL, 'ids=' . urlencode(RTB_DATA_BUSID) );
+		$this->raw = parent::post( RTB_DATA_URL, 'ids=' . urlencode(RTB_DATA_BUSID) );
 	}
 
 	/**
@@ -64,22 +69,21 @@ class RealTimeBus extends Curl {
 	 */
 
 	private function compute() {
-
-		for ($i = 0; $i < count($this->raw['data']); $i++) {
+		$raw = json_decode($this->raw, true);
+		for ($i = 0; $i < count($raw['data']); $i++) {
 			$this->computed[] = array(
-				'IS_ONLINE' => $this->raw['data'][$i]['isol'],
-				'BUS_NUM' => $this->raw['data'][$i]['carnum'],
-				'LINE_NAME' => $this->raw['data'][$i]['linename'],
-				'LINE_ID' => $this->getLineId($this->raw['data'][$i]['linename']),
-				'CURRENT_STOP_NAME' => $this->raw['data'][$i]['cursname'],
-				'CURRENT_STOP_ID' => $this->getStopId($this->raw['data'][$i]['cursname']),
-				'NEXT_STOP_NAME' => $this->raw['data'][$i]['nextsname'],
-				'POSITION_LNG' => $this->raw['data'][$i]['lng'],
-				'POSITION_LAT' => $this->raw['data'][$i]['lat'],
-				'UPDATE_TIME' => $this->raw['data'][$i]['gtime']
+				'IS_ONLINE' => $raw['data'][$i]['isol'],
+				'BUS_NUM' => $raw['data'][$i]['carnum'],
+				'LINE_NAME' => $raw['data'][$i]['linename'],
+				'LINE_ID' => $this->getLineId($raw['data'][$i]['linename']),
+				'CURRENT_STOP_NAME' => $raw['data'][$i]['cursname'],
+				'CURRENT_STOP_ID' => $this->getStopId($raw['data'][$i]['cursname']),
+				'NEXT_STOP_NAME' => $raw['data'][$i]['nextsname'],
+				'POSITION_LNG' => $raw['data'][$i]['lng'],
+				'POSITION_LAT' => $raw['data'][$i]['lat'],
+				'UPDATE_TIME' => $raw['data'][$i]['gtime']
 			);
 		}
-
 	}
 
 	/**
@@ -194,6 +198,45 @@ class RealTimeBus extends Curl {
 			}
 		}
 		return $devices;
+	}
+
+	/**
+	 *	把实时校巴原始数据缓存到数据库
+	 *
+	 *	@return void
+	 */
+
+	private function putCache() {
+		$this->getRawData();
+		$this->db->query(sprintf("UPDATE bus_realtime_cache SET `cache_data` = '%s', `cache_expires` = %d LIMIT 1;", $this->raw, time() + RTB_CACHE_EXPIRES));
+	}
+
+	/**
+	 *	获取缓存数据
+	 *
+	 *	@return void
+	 */
+
+	private function getCache() {
+		$this->db->query("SELECT cache_data FROM bus_realtime_cache LIMIT 1;");
+		$row = $this->db->fetchArray();
+		$this->raw = $row['cache_data'];
+	}
+
+	/**
+	 *	判断缓存数据是否过期
+	 *
+	 *	@return bool
+	 */
+
+	private function cacheIsExpired() {
+		$this->db->query("SELECT cache_expires FROM bus_realtime_cache LIMIT 1;");
+		$row = $this->db->fetchArray();
+		if (time() > $row['cache_expires']) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }
