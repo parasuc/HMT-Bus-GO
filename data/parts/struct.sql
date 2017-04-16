@@ -46,3 +46,8 @@ CREATE TABLE IF NOT EXISTS bus_keywords (
 	PRIMARY KEY (key_id),
 	INDEX (line_id)
 ) ENGINE = MyISAM DEFAULT CHARSET = 'utf8';
+
+CREATE TABLE IF NOT EXISTS bus_realtime_cache (
+	cache_data TEXT NOT NULL,
+	cache_expires BIGINT UNSIGNED NOT NULL
+) ENGINE = MyISAM DEFAULT CHARSET = 'utf8';

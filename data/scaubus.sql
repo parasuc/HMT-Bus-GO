@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2017-04-09 14:02:43
+-- Generation Time: 2017-04-16 17:43:43
 -- 服务器版本： 10.1.13-MariaDB
 -- PHP Version: 5.6.21
 
@@ -72,6 +72,24 @@ INSERT INTO `bus_line` (`line_id`, `line_name`, `first_bus`, `last_bus`, `line_s
 (4, '2号线', '07:20', '22:00', '荷园', '正门(地铁站)'),
 (5, '3号线', '07:40', '18:00', '正门(地铁站)', '茶山广场'),
 (6, '3号线', '07:40', '18:00', '茶山广场', '正门(地铁站)');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `bus_realtime_cache`
+--
+
+CREATE TABLE `bus_realtime_cache` (
+  `cache_data` text NOT NULL,
+  `cache_expires` bigint(20) UNSIGNED NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `bus_realtime_cache`
+--
+
+INSERT INTO `bus_realtime_cache` (`cache_data`, `cache_expires`) VALUES
+('{}', 0);
 
 -- --------------------------------------------------------
 
