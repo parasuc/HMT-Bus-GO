@@ -10,7 +10,7 @@
 
 			<div class="row" id="online-list">
 			<?php for ($i = 0; $i < count($this->data['online']); $i++): ?>
-				<div class="col-sm-6">
+				<div class="col-sm-4">
 					<div class="panel panel-success">
 						<div class="panel-heading">
 							<h3 class="panel-title"><span class="fa fa-bus"></span> <?php print $this->data['online'][$i]['BUS_NUM']; ?></h3>
@@ -33,7 +33,7 @@
 
 			<div class="row" id="offline-list">
 			<?php for ($j = 0; $j < count($this->data['offline']); $j++): ?>
-				<div class="col-sm-6">
+				<div class="col-sm-4">
 					<div class="panel panel-danger">
 						<div class="panel-heading">
 							<h3 class="panel-title"><span class="fa fa-bus"></span> <?php print $this->data['offline'][$j]['BUS_NUM']; ?></h3>
