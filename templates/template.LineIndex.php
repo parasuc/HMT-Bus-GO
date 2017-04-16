@@ -6,7 +6,7 @@
 					<div class="col-sm-4">
 						<div class="panel panel-success">
 							<div class="panel-heading">
-								<h3 class="panel-title">1号线</h3>
+								<h3 class="panel-title"><span class="fa fa-bus"></span> 1号线</h3>
 							</div>
 							<div class="list-group">
 							<?php foreach($this->data['line1'] as $line1): ?>
@@ -18,7 +18,7 @@
 					<div class="col-sm-4">
 						<div class="panel panel-warning">
 							<div class="panel-heading">
-								<h3 class="panel-title">2号线</h3>
+								<h3 class="panel-title"><span class="fa fa-bus"></span> 2号线</h3>
 							</div>
 							<div class="list-group">
 							<?php foreach($this->data['line2'] as $line2): ?>
@@ -30,7 +30,7 @@
 					<div class="col-sm-4">
 						<div class="panel panel-info">
 							<div class="panel-heading">
-								<h3 class="panel-title">3号线</h3>
+								<h3 class="panel-title"><span class="fa fa-bus"></span> 3号线</h3>
 							</div>
 							<div class="list-group">
 							<?php foreach($this->data['line3'] as $line3): ?>
