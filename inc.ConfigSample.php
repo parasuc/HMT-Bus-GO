@@ -39,6 +39,8 @@ define("RTB_CACHE_EXPIRES", 15);
 
 //是否启用开发者模式? (1=是, 0=否)
 define("DEVMODE", 0);
+//是否处于维护模式? (1=是, 0=否)
+define("MAINTENANCE", 0);
 //定义根网址
 define("BASE_URL", ''); //这里填上你要放置这个程序的地址。地址后面要加上"/"符号
 //定义系统管理员Email地址
