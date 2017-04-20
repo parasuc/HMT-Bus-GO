@@ -27,7 +27,9 @@ class SCAUBus {
 
 	public function __construct() {
 		$this->getInstance();
-		$this->BusData->realTimeBus = $this->RealTimeBus->getData();
+		if (!MAINTENANCE) {
+			$this->BusData->realTimeBus = $this->RealTimeBus->getData();
+		}
 	}
 
 	/**
@@ -38,8 +40,10 @@ class SCAUBus {
 
 	private function getInstance() {
 		//实例化也是有优先级的
-		$this->BusData = new BusData();
-		$this->RealTimeBus = new RealTimeBus();
+		if (!MAINTENANCE) {
+			$this->BusData = new BusData();
+			$this->RealTimeBus = new RealTimeBus();
+		}
 		$this->Template = new Template();
 	}
 
@@ -50,14 +54,18 @@ class SCAUBus {
 	 */
 
 	private function router() {
-		switch(@$_GET['mod']) {
-			case 'lineinfo':		require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.LineInfo.php';			break;
-			case 'stopinfo':		require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.StopInfo.php';			break;
-			case 'stopsearch':		require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.StopSearch.php';		break;
-			case 'lineindex':		require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.LineIndex.php';		break;
-			case 'stopindex':		require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.StopIndex.php';		break;
-			case 'realtimestatus':	require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.RealTimeStatus.php';	break;
-			default:				require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.Homepage.php';			break;
+		if (MAINTENANCE) {
+			require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.OnMaintenance.php';
+		} else {
+			switch(@$_GET['mod']) {
+				case 'lineinfo': require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.LineInfo.php'; break;
+				case 'stopinfo': require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.StopInfo.php'; break;
+				case 'stopsearch': require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.StopSearch.php'; break;
+				case 'lineindex': require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.LineIndex.php'; break;
+				case 'stopindex': require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.StopIndex.php'; break;
+				case 'realtimestatus': require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.RealTimeStatus.php'; break;
+				default: require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.Homepage.php'; break;
+			}
 		}
 	}
 
