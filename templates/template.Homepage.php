@@ -35,7 +35,7 @@
 							<nav class="hidden-xs">
 								<ul class="nav masthead-nav">
 									<li class="active"><a href="javascript:;" id="home"><span class="fa fa-home"></span> 首页</a></li>
-									<li><a href="./index.php?mod=lineindex"><span class="fa fa-code-fork"></span> 线路查询</a></li>
+									<li><a href="./index.php?mod=lineindex"><span class="fa fa-bus"></span> 线路查询</a></li>
 									<li><a href="./index.php?mod=stopindex"><span class="fa fa-map-marker"></span> 站点查询</a></li>
 									<li><a href="./index.php?mod=realtimestatus"><span class="fa fa-clock-o"></span> 实时状态</a></li>
 								</ul>
@@ -62,14 +62,14 @@
 					</div>
 
 					<div id="modes" class="inner cover">
-						<div class="col-sm-4">
-							<p class="lead"><a href="./index.php?mod=lineindex" class="btn btn-lg btn-default"><span class="fa fa-code-fork"></span> 查询校巴线路</a></p>
+						<div class="col-xs-6 col-sm-4">
+							<p class="lead"><a href="./index.php?mod=lineindex" class="btn btn-lg btn-default"><span class="fa fa-bus"></span> <span class="visible-xs">查线路</span><span class="hidden-xs">查询校巴线路</span></a></p>
 						</div>
-						<div class="col-sm-4">
-							<p class="lead"><a href="./index.php?mod=stopindex" class="btn btn-lg btn-default"><span class="fa fa-map-marker"></span> 查询校巴站点</a></p>
+						<div class="col-xs-6 col-sm-4">
+							<p class="lead"><a href="./index.php?mod=stopindex" class="btn btn-lg btn-default"><span class="fa fa-map-marker"></span> <span class="visible-xs">查站点</span><span class="hidden-xs">查询校巴站点</span></a></p>
 						</div>
-						<div class="col-sm-4">
-							<p class="lead"><a href="./index.php?mod=realtimestatus" class="btn btn-lg btn-default"><span class="fa fa-clock-o"></span> 实时校巴状态</a></p>
+						<div class="col-xs-12 col-sm-4">
+							<p class="lead"><a href="./index.php?mod=realtimestatus" class="btn btn-lg btn-default"><span class="fa fa-clock-o"></span> <span class="visible-xs">查看实时状态</span><span class="hidden-xs">实时校巴状态</span></a></p>
 						</div>
 					</div>
 
