@@ -26,9 +26,7 @@ define("DB_NAME", '');
 //############## 实时校巴设置 ################//
 
 //实时校巴数据获取地址
-define("RTB_DATA_URL", 'http://120.55.243.109/MapMonitor/GetCarInfo');
-//需要获取实时数据的校巴ID (多个ID用逗号隔开)
-define('RTB_DATA_BUSID', '2,3,7,9,10,15,207883300,654408972,1484614871,1736548547,1863789157,2053060190');
+define("RTB_DATA_URL", 'https://hbus.scau.edu.cn/api/');
 //实时校巴数据缓存期限 (单位：秒)
 define("RTB_CACHE_EXPIRES", 15);
 
