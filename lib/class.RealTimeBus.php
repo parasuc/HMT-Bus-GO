@@ -59,7 +59,7 @@ class RealTimeBus extends Curl {
 	 */
 
 	private function getRawData() {
-		$this->raw = parent::post( RTB_DATA_URL, 'ids=' . urlencode(RTB_DATA_BUSID) );
+		$this->raw = parent::get(RTB_DATA_URL);
 	}
 
 	/**
