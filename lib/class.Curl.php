@@ -31,7 +31,7 @@ class Curl {
 	 *	执行一个cURL会话 (GET方式)
 	 *
 	 *	@param string $url [要抓取的URL]
-	 *	@return mixed
+	 *	@return void
 	 */
 
 	protected function get($url) {
@@ -54,8 +54,8 @@ class Curl {
 	 *	执行一个cURL会话 (POST方式)
 	 *
 	 *	@param string $url [要抓取的URL]
-	 *	@param array $data [要POST的数据 (以数组方式) ]
-	 *	@return mixed
+	 *	@param string $data [要POST的数据 (需URLENCODE)]
+	 *	@return void
 	 */
 
 	protected function post($url, $data) {
