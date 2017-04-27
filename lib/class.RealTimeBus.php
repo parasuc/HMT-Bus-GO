@@ -138,6 +138,9 @@ class RealTimeBus extends Curl {
 	 */
 
 	public function getDataByLineId($lineId) {
+		if (!is_numeric($lineId)) {
+			throw new Error('传入线路ID有误');
+		}
 		$this->db->query("SELECT s.stop_id, s.stop_name, s.stop_alias, r.stop_sort FROM bus_stop AS s LEFT JOIN bus_relationship AS r USING (stop_id) LEFT JOIN bus_line AS l USING (line_id) WHERE line_id = {$lineId} ORDER BY stop_sort ASC;");
 		$rows = array();
 		$i = 0;
