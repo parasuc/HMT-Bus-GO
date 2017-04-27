@@ -10,8 +10,8 @@
 
 $this->Template->setPageTitle('站点检索');
 
-/* 加载线路数据 */
-$rows = $this->BusData->getStopListByName(urldecode($_GET['name']));
+/* 加载站点数据 */
+$rows = $this->BusData->getStopListByName(urldecode(@$_GET['name']));
 $total = count($rows);
 
 /* 把数据挂载到data数组上 */
