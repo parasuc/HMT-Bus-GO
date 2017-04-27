@@ -36,6 +36,9 @@ class BusData extends DB {
 	 */
 
 	public function getLineDetail($lineId) {
+		if (!is_numeric($lineId)) {
+			throw new Error('传入线路ID有误');
+		}
 		parent::query("SELECT * FROM bus_line WHERE line_id = {$lineId} LIMIT 1;");
 		$rows = array();
 		$i = 0;
@@ -54,6 +57,9 @@ class BusData extends DB {
 	 */
 
 	public function getStopByLineId($lineId) {
+		if (!is_numeric($lineId)) {
+			throw new Error('传入线路ID有误');
+		}
 		parent::query("SELECT s.stop_id, s.stop_name, r.stop_sort FROM bus_stop AS s LEFT JOIN bus_relationship AS r USING (stop_id) LEFT JOIN bus_line AS l USING (line_id) WHERE line_id = {$lineId} ORDER BY stop_sort ASC;");
 		$rows = array();
 		$i = 0;
@@ -72,6 +78,9 @@ class BusData extends DB {
 	 */
 
 	public function getStopDetail($stopId) {
+		if (!is_numeric($stopId)) {
+			throw new Error('传入站点ID有误');
+		}
 		parent::query("SELECT * FROM bus_stop WHERE stop_id = {$stopId} LIMIT 1;");
 		$rows = array();
 		$i = 0;
@@ -145,6 +154,9 @@ class BusData extends DB {
 	 */
 
 	public function getLineByStopId($stopId) {
+		if (!is_numeric($stopId)) {
+			throw new Error('传入站点ID有误');
+		}
 		parent::query("SELECT l.line_id, l.line_name, l.line_start, l.line_end FROM bus_stop AS s LEFT JOIN bus_relationship as r USING (stop_id) LEFT JOIN bus_line AS l USING (line_id) WHERE stop_id = {$stopId} ORDER BY line_id ASC;");
 		$rows = array();
 		$i = 0;
