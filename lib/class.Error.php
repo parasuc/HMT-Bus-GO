@@ -32,6 +32,7 @@ class Error extends Exception {
 		$this->error['file'] = $this->getFile();
 		$this->error['line'] = $this->getLine();
 		$this->printErrorMsg();
+		die();
 	}
 
 	/**
