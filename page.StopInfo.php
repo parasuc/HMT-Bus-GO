@@ -15,7 +15,7 @@ if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
 	die();
 }
 
-/* 加载线路数据 */
+/* 加载站点数据 */
 $id = $_GET['id'];
 $stop = $this->BusData->getStopDetail($id);
 $lineList = $this->BusData->getLineByStopId($id);
