@@ -36,7 +36,7 @@ class BusData extends DB {
 	 */
 
 	public function getLineDetail($lineId) {
-		if (!is_numeric($lineId)) {
+		if (!Verifier::isNumber($lineId)) {
 			throw new Error('传入线路ID有误');
 		}
 		parent::query("SELECT * FROM bus_line WHERE line_id = {$lineId} LIMIT 1;");
@@ -57,7 +57,7 @@ class BusData extends DB {
 	 */
 
 	public function getStopByLineId($lineId) {
-		if (!is_numeric($lineId)) {
+		if (!Verifier::isNumber($lineId)) {
 			throw new Error('传入线路ID有误');
 		}
 		parent::query("SELECT s.stop_id, s.stop_name, r.stop_sort FROM bus_stop AS s LEFT JOIN bus_relationship AS r USING (stop_id) LEFT JOIN bus_line AS l USING (line_id) WHERE line_id = {$lineId} ORDER BY stop_sort ASC;");
@@ -78,7 +78,7 @@ class BusData extends DB {
 	 */
 
 	public function getStopDetail($stopId) {
-		if (!is_numeric($stopId)) {
+		if (!Verifier::isNumber($stopId)) {
 			throw new Error('传入站点ID有误');
 		}
 		parent::query("SELECT * FROM bus_stop WHERE stop_id = {$stopId} LIMIT 1;");
@@ -154,7 +154,7 @@ class BusData extends DB {
 	 */
 
 	public function getLineByStopId($stopId) {
-		if (!is_numeric($stopId)) {
+		if (!Verifier::isNumber($stopId)) {
 			throw new Error('传入站点ID有误');
 		}
 		parent::query("SELECT l.line_id, l.line_name, l.line_start, l.line_end FROM bus_stop AS s LEFT JOIN bus_relationship as r USING (stop_id) LEFT JOIN bus_line AS l USING (line_id) WHERE stop_id = {$stopId} ORDER BY line_id ASC;");
@@ -162,6 +162,50 @@ class BusData extends DB {
 		$i = 0;
 		while( $row = parent::fetchArray() ) {
 			$rows[$i] = $row;
+			$i++;
+		}
+		return $rows;
+	}
+
+	/**
+	 *	根据线路ID查询线路时刻表
+	 *
+	 *	@param int $lineId [线路ID]
+	 *	@param int $type [时刻表类型 (1=工作日，2=周末节假日)]
+	 *	@return array
+	 */
+
+	public function getTimetableByLineId($lineId, $type) {
+		if (!Verifier::isNumber($lineId)) {
+			throw new Error('传入线路ID有误');
+		} elseif (!Verifier::isNumber($type)) {
+			throw new Error('传入时刻表类型错误');
+		}
+		parent::query(sprintf("SELECT t.* FROM bus_timetable AS t LEFT JOIN bus_line AS l USING (line_id) WHERE line_id = %d AND table_type = %d ORDER BY table_id ASC;", $lineId, $type));
+		$rows = array();
+		$i = 0;
+		while( $row = parent::fetchArray() ) {
+			$rows[$i] = $row;
+			$i++;
+		}
+		return $rows;
+	}
+
+	/**
+	 *	获取全部站点的位置信息
+	 *
+	 *	@return array
+	 */
+
+	public function getStopLocation() {
+		parent::query("SELECT * FROM bus_stop ORDER BY stop_id ASC;");
+		$rows = array();
+		$i = 0;
+		while( $row = parent::fetchArray() ) {
+			$rows[$i] = array(
+				'title' => $row['stop_name'],
+				'position' => array($row['stop_lng'], $row['stop_lat'])
+			);
 			$i++;
 		}
 		return $rows;
