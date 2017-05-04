@@ -106,6 +106,7 @@ class Template extends Options {
 	public function copyright() {
 		print '<p>' . $this->sysName . ' ' . $this->sysVersion . '.</p>';
 		print '<p><a href="' . $this->sysAuthorUrl . '" target="_blank">' . $this->sysAuthor . '</a> × <a href="' . $this->serverProviderUrl . '" target="_blank">' . $this->serverProvider . '</a> 联合制作.</p>';
+		print '<p>' . $this->dataProvider . ' 提供数据支持.</p>';
 	}
 
 }
