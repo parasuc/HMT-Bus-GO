@@ -17,7 +17,7 @@ class Options {
 	 *	@var string
 	 */
 
-	public $sysVersion = '1.0 BETA';
+	public $sysVersion = '1.0';
 
 	/**
 	 *	程序名称
