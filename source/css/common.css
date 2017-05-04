@@ -6,4 +6,139 @@
  *	@license MIT
  *	@note 通用CSS
  */
-body{padding:70px 0 0 0;font-family:'Work Sans',Helvetica,Tahoma,Arial,"Microsoft YaHei","微软雅黑",SimSun,"宋体",Heiti,"黑体",sans-serif!important}.footer{padding-top:60px;padding-bottom:30px;text-align:center}.noscript{position:fixed;padding:70px 20px 0 20px;top:0;left:0;z-index:1000;background-color:#fff;width:100%;height:100%}#loader{display:none;position:fixed;top:0;left:0;z-index:1000;background-color:#000;width:100%;height:100%;text-align:center;opacity:.8}.loader-body{z-index:2000;position:absolute;top:50%;left:50%;margin-top:-60px;margin-left:-42px;color:#fff}.loader-body h1{font-size:60px}.loader-spinner{animation:fa-spin 1.5s infinite linear}.footer a{color:#333}.footer a:hover{color:#333}.footer a:visited{color:#333}
+body {
+    padding: 51px 0 0 0;
+    font-family: 'Work Sans',Helvetica,Tahoma,Arial,"Microsoft YaHei","微软雅黑",SimSun,"宋体",Heiti,"黑体",sans-serif!important
+}
+
+.footer {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    text-align: center;
+}
+
+.noscript {
+    position: fixed;
+    padding: 70px 20px 0 20px;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: #fff;
+    width: 100%;
+    height: 100%
+}
+
+#loader {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: #000;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    opacity: .8
+}
+
+.loader-body {
+    z-index: 2000;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -60px;
+    margin-left: -42px;
+    color: #fff
+}
+
+.loader-body h1 {
+    font-size: 60px
+}
+
+.loader-spinner {
+    animation: fa-spin 1.5s infinite linear
+}
+
+.footer a {
+    color: #333
+}
+
+.footer a:hover {
+    color: #333
+}
+
+.footer a:visited {
+    color: #333
+}
+
+.wrap-s {
+    padding-top: 19px;
+}
+
+.wrap {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.homepage {
+    text-align: center;
+}
+
+.feature {
+    font-size: 96px;
+}
+
+.homepage-banner {
+    background-color: #0099ff;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    color: #fff;
+    text-shadow: 0 1px 3px rgba(0,0,0,.5);
+}
+
+.homepage-feature {
+    background-color: #ccffff;
+    color: #336666;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.homepage-wxss {
+    background-color: #ffcc66;
+    color: #993300;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.timetable {
+    display: none;
+}
+
+#busmap {
+    height: 350px;
+    margin: 0px;
+}
+
+.map-border {
+    display: block;
+    padding: 4px;
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    -webkit-transition: border 0.2s ease-in-out;
+    -o-transition: border 0.2s ease-in-out;
+    transition: border 0.2s ease-in-out;
+}
+
+@media(min-width: 768px) {
+    .homepage h1 {
+       font-size: 60px;
+    }
+
+    #busmap {
+        height: 500px;
+        margin: 0px;
+    }
+}
