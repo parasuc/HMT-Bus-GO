@@ -63,7 +63,7 @@ class SCAUBus {
 				case 'stopsearch': require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.StopSearch.php'; break;
 				case 'lineindex': require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.LineIndex.php'; break;
 				case 'stopindex': require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.StopIndex.php'; break;
-				case 'realtimestatus': require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.RealTimeStatus.php'; break;
+				case 'busmap': require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.BusMap.php'; break;
 				default: require_once BASE_ROOT . DIRECTORY_SEPARATOR . 'page.Homepage.php'; break;
 			}
 		}
