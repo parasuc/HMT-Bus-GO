@@ -203,6 +203,7 @@ class BusData extends DB {
 		$i = 0;
 		while ( $row = parent::fetchArray() ) {
 			$rows[$i] = array(
+				'stopId' => $row['stop_id'],
 				'title' => $row['stop_name'],
 				'position' => array($row['stop_lng'], $row['stop_lat'])
 			);
