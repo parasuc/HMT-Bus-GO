@@ -13,6 +13,7 @@ $this->Template->setPageTitle('校巴地图');
 /* 把数据挂载到data数组上 */
 $this->Template->data['online'] = $this->RealTimeBus->getDevice(1);
 $this->Template->data['offline'] = $this->RealTimeBus->getDevice(0);
+$this->Template->data['polyline'] = $this->BusData->getPolyline();
 
 $this->Template->need('Header');
 $this->Template->need('BusMap');
