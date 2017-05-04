@@ -174,8 +174,8 @@
 		if (document.getElementById('busmap')) {
 			map = new AMap.Map('busmap',{
 				resizeEnable: true,
-				zoom: 16,
-				center: [113.354573, 23.155394]
+				zoom: 15,
+				center: [113.359423, 23.157328]
 			});
 			AMap.plugin(['AMap.Scale'], function() {
 				var scale = new AMap.Scale();
