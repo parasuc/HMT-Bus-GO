@@ -34,14 +34,6 @@
 	var stopList = "";
 
 	/**
-	 *	线路路径存储变量
-	 *
-	 *	@var array
-	 */
-
-	var linePath = '';
-
-	/**
 	 *	定义实时站点自动刷新Flag
 	 *
 	 *	@var bool
@@ -95,6 +87,22 @@
 	 */
 
 	var busOnline = busOffline = [];
+
+	/**
+	 *	定义地图实例存储变量
+	 *
+	 *	@var object
+	 */
+
+	var map;
+
+	/**
+	 *	线路路径存储变量
+	 *
+	 *	@var array
+	 */
+
+	var polyline;
 
 	/**
 	 *	绑定所有的事件处理器
@@ -164,7 +172,7 @@
 		});
 		
 		if (document.getElementById('busmap')) {
-			var map = new AMap.Map('busmap',{
+			map = new AMap.Map('busmap',{
 				resizeEnable: true,
 				zoom: 16,
 				center: [113.354573, 23.155394]
@@ -173,15 +181,34 @@
 				var scale = new AMap.Scale();
 				map.addControl(scale);
 			});
+			AMap.plugin('AMap.Geolocation', function() {
+				var geolocation = new AMap.Geolocation({
+					enableHighAccuracy: true,
+					timeout: 60000,
+					buttonOffset: new AMap.Pixel(10, 20),
+					zoomToAccuracy: true,
+					buttonPosition: 'RB',
+					markerOptions: {
+						icon: './source/img/map-marker/marker-you.png'
+					}
+				});
+				map.addControl(geolocation);
+				geolocation.getCurrentPosition();
+			});
 
-			getStopLocation(map);
-			getBusLocation(map);
+			getStopLocation();
+			getBusLocation();
 			refreshDevice();
 
 			getBusLocationInterval = setInterval(function() {
-				getBusLocation(map);
+				getBusLocation();
 				refreshDevice();
-			}, 15000);
+			}, cacheTimeout);
+
+			$('a[class="list-group-item get-polyline-link"]').on('click', function(e) {
+				var lineId = e.currentTarget.id;
+				getPolyline(lineId);
+			});
 
 		}
 	}
@@ -213,7 +240,7 @@
 				ajax = null;
 				refreshDevice();
 			}
-		}, 10000);
+		}, 4000);
 	}
 
 	/**
@@ -282,7 +309,7 @@
 					$("#loader").fadeIn("fast");
 					NProgress.start();
 					refreshStopList();
-				}, 15000);
+				}, cacheTimeout);
 			} else {
 				clearInterval(stopListInterval);
 			}
@@ -292,11 +319,10 @@
 	/**
 	 *	加载校巴位置
 	 *
-	 *	@param object mapa [地图实例]
 	 *	@return void
 	 */
 
-	function getBusLocation(map) {
+	function getBusLocation() {
 		var aj = $.get('./ajax/ajax.GetBusLocation.php', function(r) {
 			map.remove(busOnline);
 			map.remove(busOffline);
@@ -328,19 +354,18 @@
 			if (aj) {
 				aj.abort();
 				aj = null;
-				getBusLocation(map);
+				getBusLocation();
 			}
-		}, 10000);
+		}, 4000);
 	}
 
 	/**
 	 *	加载站点位置
 	 *
-	 *	@param object map [地图实例]
 	 *	@return void
 	 */
 
-	function getStopLocation(map) {
+	function getStopLocation() {
 		var aj = $.get('./ajax/ajax.GetStopLocation.php', function(r) {
 			for (i = 0; i < r.length; i++) {
 				marker = new AMap.Marker({
@@ -358,66 +383,40 @@
 				aj = null;
 				getStopLocation();
 			}
-		}, 10000);
+		}, 4000);
 	}
 
 	/**
 	 *	加载校巴线路路径
 	 *
-	 *	@param object map [地图实例]
+	 *	@param int lineId [线路ID]
 	 *	@return void
 	 */
 
-	function getLinePath(map) {
-		var line = [ 
-				[113.346806, 23.158857],
-				[113.34614, 23.158975],
-				[113.347085,23.158482],
-				[113.347278,23.158482],
-				[113.347557,23.158403],
-				[113.347578,23.158383],
-				[113.348072,23.158995],
-				[113.348683,23.158975],
-				[113.349617,23.158798],
-				[113.35011,23.15866],
-				[113.352599,23.15861],
-				[113.352599,23.159271],
-				[113.352717,23.159202],
-				[113.35306,23.159163],
-				[113.353318,23.159182],
-				[113.353618,23.159232],
-				[113.354123,23.159182],
-				[113.354112,23.159172],
-				[113.354466,23.157683],
-				[113.35453,23.154783],
-				[113.354638,23.154694],
-				[113.357062,23.154674],
-				[113.357127,23.153086],
-				[113.366225,23.153086],
-				[113.366439,23.153106],
-				[113.366439,23.151439],
-				[113.366783,23.151675],
-				[113.369701,23.151715],
-				[113.369744,23.153106],
-				[113.372008,23.154013],
-				[113.372093,23.154615],
-				[113.371418,23.155256],
-				[113.370087,23.156854],
-				[113.369411,23.157426],
-				[113.368328,23.158018],
-				[113.368338,23.160524]
-			];
-
-			var polyline = new AMap.Polyline({
-				path: line,
-				strokeColor: '#0099ff',
+	function getPolyline(lineId) {
+		if (polyline) {
+			polyline.setMap(null);
+		}
+		var aj = $.post('./ajax/ajax.GetPolyline.php', {id: lineId}, function(r) {
+			polyline = new AMap.Polyline({
+				path: r[0].poly_path,
+				strokeColor: r[0].poly_color,
 				strokeOpacity: 0.8,
 				strokeWeight: 5,
 				strokeStyle: 'soild',
 				strokeDasharray: [10, 5]
 			});
-
 			polyline.setMap(map);
+			aj = null;
+		});
+		setTimeout(function() {
+			if (aj) {
+				aj.abort();
+				aj = null;
+				getPolyline(lineId);
+			}
+		}, 4000);
+		
 	}
 
 	/**
