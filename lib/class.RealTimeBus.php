@@ -79,8 +79,8 @@ class RealTimeBus extends Curl {
 				'CURRENT_STOP_NAME' => $raw['data'][$i]['cursname'],
 				'CURRENT_STOP_ID' => $this->getStopId($raw['data'][$i]['cursname']),
 				'NEXT_STOP_NAME' => $raw['data'][$i]['nextsname'],
-				'POSITION_LNG' => $raw['data'][$i]['lng'],
-				'POSITION_LAT' => $raw['data'][$i]['lat'],
+				'POSITION_LNG' => $raw['data'][$i]['mlng'],
+				'POSITION_LAT' => $raw['data'][$i]['mlat'],
 				'UPDATE_TIME' => $raw['data'][$i]['gtime']
 			);
 		}
@@ -138,7 +138,7 @@ class RealTimeBus extends Curl {
 	 */
 
 	public function getDataByLineId($lineId) {
-		if (!is_numeric($lineId)) {
+		if (!Verifier::isNumber($lineId)) {
 			throw new Error('传入线路ID有误');
 		}
 		$this->db->query("SELECT s.stop_id, s.stop_name, s.stop_alias, r.stop_sort FROM bus_stop AS s LEFT JOIN bus_relationship AS r USING (stop_id) LEFT JOIN bus_line AS l USING (line_id) WHERE line_id = {$lineId} ORDER BY stop_sort ASC;");
@@ -240,6 +240,33 @@ class RealTimeBus extends Curl {
 		} else {
 			return false;
 		}
+	}
+
+	/**
+	 *	获取所有车辆的位置
+	 *
+	 *	@return array
+	 */
+
+	public function getBusLocation() {
+		$devices = array();
+		for ($a = 0; $a < count($this->computed); $a++) {
+			if ($this->computed[$a]['IS_ONLINE']) {
+				$devices['online'][] = array(
+					'title' => $this->computed[$a]['BUS_NUM'],
+					'position' => array($this->computed[$a]['POSITION_LNG'], $this->computed[$a]['POSITION_LAT'])
+				);
+			}
+		}
+		for ($b = 0; $b < count($this->computed); $b++) {
+			if (!$this->computed[$b]['IS_ONLINE']) {
+				$devices['offline'][] = array(
+					'title' => $this->computed[$b]['BUS_NUM'],
+					'position' => array($this->computed[$b]['POSITION_LNG'], $this->computed[$b]['POSITION_LAT'])
+				);
+			}
+		}
+		return $devices;
 	}
 
 }
