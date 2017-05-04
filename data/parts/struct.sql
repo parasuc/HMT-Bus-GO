@@ -15,9 +15,11 @@ CREATE TABLE IF NOT EXISTS bus_line (
 	last_bus CHAR(5) NOT NULL,
 	line_start VARCHAR(30) NOT NULL,
 	line_end VARCHAR(30) NOT NULL,
+	line_inverse INT UNSIGNED DEFAULT NULL,
 	PRIMARY KEY (line_id),
 	INDEX (line_start),
-	INDEX (line_end)
+	INDEX (line_end),
+	INDEX (line_inverse)
 ) ENGINE = MyISAM DEFAULT CHARSET = 'utf8';
 
 CREATE TABLE IF NOT EXISTS bus_stop (
@@ -50,4 +52,23 @@ CREATE TABLE IF NOT EXISTS bus_keywords (
 CREATE TABLE IF NOT EXISTS bus_realtime_cache (
 	cache_data TEXT NOT NULL,
 	cache_expires BIGINT UNSIGNED NOT NULL
+) ENGINE = MyISAM DEFAULT CHARSET = 'utf8';
+
+CREATE TABLE IF NOT EXISTS bus_timetable (
+	table_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	line_id INT UNSIGNED NOT NULL,
+	table_type TINYINT(1) UNSIGNED NOT NULL, -- 1表示工作日，2表示周末
+	table_time VARCHAR(50) NOT NULL,
+	PRIMARY KEY (table_id),
+	INDEX (line_id),
+	INDEX (table_time)
+) ENGINE = MyISAM DEFAULT CHARSET = 'utf8';
+
+CREATE TABLE IF NOT EXISTS bus_polyline (
+	poly_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	line_id INT UNSIGNED NOT NULL,
+	poly_color VARCHAR(7) NOT NULL,
+	poly_path TEXT NOT NULL,
+	PRIMARY KEY (poly_id),
+	INDEX (line_id)
 ) ENGINE = MyISAM DEFAULT CHARSET = 'utf8';
