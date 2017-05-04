@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 	$id = $_POST['lineId'];
 
-	if (empty($id) || !is_numeric($id)) {
+	if (!Verifier::isNumber($id)) {
 
 		throw new Error('线路ID传入有误');
 
