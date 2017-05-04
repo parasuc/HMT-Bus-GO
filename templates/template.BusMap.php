@@ -1,7 +1,7 @@
 <div class="wrap"></div>
 <div class="container">
 	<div class="page-header">
-		<h2><span class="fa fa-map"></span> 校巴地图</h2>
+		<h3><span class="fa fa-map"></span> 校巴地图</h3>
 	</div>
 	<div class="row">
 		<div class="col-sm-8">
@@ -21,17 +21,19 @@
 					<li class="list-group-item"><img src="<?php $this->sourceUrl('img/map-marker/marker-you.png'); ?>"> 您所在的位置</li>
 				</ul>
 			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">线路列表（点击线路可在地图上标出）</h3>
+				</div>
+				<div class="list-group">
+				<?php foreach($this->data['polyline'] as $polyline): ?>
+					<a class="list-group-item get-polyline-link" id="<?php print $polyline['line_id']; ?>" href="javascript:;"><span class="fa fa-minus" style="color: <?php print $polyline['poly_color']; ?>;"></span>&nbsp;&nbsp;<?php print $polyline['line_name']; ?> [ <?php print $polyline['line_start']; ?> 开往 <?php print $polyline['line_end']; ?> ]</a>
+				<?php endforeach; ?>
+				</div>
+			</div>
 			<div class="alert alert-info">
 				<strong><span class="fa fa-info-circle"></span> 提示：</strong> 数据自动刷新间隔：<?php print RTB_CACHE_EXPIRES; ?>秒
 			</div>
-			<!--<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">线路颜色</h3>
-				</div>
-				<ul class="list-group">
-					<li class="list-group-item"><span class="fa fa-minus" style="color: #0099ff;"></span>&nbsp;&nbsp;1号线</li>
-				</ul>
-			</div>-->
 		</div>
 	</div>
 	<div class="page-header">
