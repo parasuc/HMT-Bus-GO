@@ -91,4 +91,12 @@ class Options {
 
 	public $serverProviderUrl = 'http://hometown.scau.edu.cn/official/';
 
+	/**
+	 *	Data Provider
+	 *
+	 *	@var string
+	 */
+
+	public $dataProvider = '佳华利道公司';
+
 }
