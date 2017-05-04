@@ -189,7 +189,8 @@
 					zoomToAccuracy: true,
 					buttonPosition: 'RB',
 					markerOptions: {
-						icon: './source/img/map-marker/marker-you.png'
+						icon: './source/img/map-marker/marker-you.png',
+						offset: new AMap.Pixel(-18, -18)
 					}
 				});
 				map.addControl(geolocation);
@@ -329,23 +330,55 @@
 			var online = r.online;
 			var offline = r.offline;
 			for (i = 0; i < online.length; i++) {
-				marker = new AMap.Marker({
+				onlineMarker = new AMap.Marker({
 					icon: './source/img/map-marker/marker-bus-online.png',
 					position: online[i].position,
-					title: online[i].title + '（终端在线）'
+					offset: new AMap.Pixel(-18, -18),
+					extData: {
+						busNum: online[i].busNum,
+						line: online[i].line,
+						currentStop: online[i].currentStop,
+						nextStop: online[i].nextStop,
+						lastUpdate: online[i].lastUpdate
+					}
 				});
-				marker.setMap(map);
-				busOnline.push(marker);
+				onlineMarker.setMap(map);
+				busOnline.push(onlineMarker);
+				AMap.event.addListener(onlineMarker, 'click', function(e) {
+					var data = e.target.G.extData;
+					var title = '<span class="fa fa-bus"></span> ' + data.busNum;
+					var content = '<ul class="list-group">';
+					content += '<li class="list-group-item"><strong>终端状态:</strong> <span class="text-success">在线</span></li>'; 
+					content += '<li class="list-group-item"><strong>执行线路:</strong> ' + data.line + '</li>';
+					content += '<li class="list-group-item"><strong>当前站:</strong> ' + data.currentStop + '</li>';
+					content += '<li class="list-group-item"><strong>下一站:</strong> ' + data.nextStop + '</li>';
+					content += '<li class="list-group-item"><strong>GPS最后更新时间:</strong> ' + data.lastUpdate + '</li>';
+					content += '</ul>';
+					showMarkerDetail(title, content);
+				});
 
 			}
 			for (k = 0; k < offline.length; k++) {
-				marker = new AMap.Marker({
+				offlineMarker = new AMap.Marker({
 					icon: './source/img/map-marker/marker-bus-offline.png',
 					position: offline[k].position,
-					title: offline[k].title + '（终端离线）'
+					offset: new AMap.Pixel(-18, -18),
+					extData: {
+						busNum: offline[k].busNum,
+						lastUpdate: offline[k].lastUpdate
+					}
 				});
-				marker.setMap(map);
-				busOffline.push(marker);
+				offlineMarker.setMap(map);
+				busOffline.push(offlineMarker);
+				AMap.event.addListener(offlineMarker, 'click', function(e) {
+					var data = e.target.G.extData;
+					var title = '<span class="fa fa-bus"></span> ' + data.busNum;
+					var content = '<ul class="list-group">';
+					content += '<li class="list-group-item"><strong>终端状态:</strong> <span class="text-danger">离线</span></li>'; 
+					content += '<li class="list-group-item"><strong>GPS最后更新时间:</strong> ' + data.lastUpdate + '</li>';
+					content += '</ul>';
+					showMarkerDetail(title, content);
+				});
 			}
 			aj = null;
 		});
@@ -371,9 +404,14 @@
 				marker = new AMap.Marker({
 					icon: './source/img/map-marker/marker-stop.png',
 					position: r[i].position,
-					title: r[i].title
+					offset: new AMap.Pixel(-18, -18),
+					extData: {stopId: r[i].stopId}
 				});
 				marker.setMap(map);
+				AMap.event.addListener(marker, 'click', function(e) {
+					var stopId = e.target.G.extData.stopId;
+					loadStopDetail(stopId);
+				});
 			}
 			aj = null;
 		});
@@ -416,7 +454,58 @@
 				getPolyline(lineId);
 			}
 		}, 4000);
-		
+	}
+
+	/**
+	 *	设置marker-detail模态框并调出
+	 *
+	 *	@param string title [模态框标题]
+	 *	@param string content [模态框正文]
+	 *	@return void
+	 *	@note 标题和正文都支持HTML
+	 */
+
+	function showMarkerDetail(title, content) {
+		$('#marker-title').html(title);
+		$('#marker-content').html(content);
+		$('#marker-detail').modal('show');
+	}
+
+	/**
+	 *	加载站点详情
+	 *
+	 *	@param int stopId [站点ID]
+	 *	@return void
+	 */
+
+	function loadStopDetail(stopId) {
+		NProgress.start();
+		$("#loader").fadeIn("fast");
+		var aj = $.post('./ajax/ajax.GetStopDetail.php', {id: stopId}, function(r) {
+			console.log(r);
+			var stop = r.stop[0];
+			var lineList = r.lineList;
+			var title = '<span class="fa fa-map-marker"></span> ' + stop.stop_name;
+			var content = '<div class="alert alert-info">有 <strong>' + lineList.length + '</strong> 条线路经过此站</div>';
+			content += '<div class="list-group">';
+			for (i = 0; i < lineList.length; i++) {
+				content += '<a data-pjax="no-pjax" href="./index.php?mod=lineinfo&id=' + lineList[i].line_id + '" class="list-group-item"><span class="fa fa-bus"></span> ' + lineList[i].line_name + ' [ ' + lineList[i].line_start + ' 开往 ' + lineList[i].line_end + ' ]</a>';
+			}
+			content += '</div>';
+			showMarkerDetail(title, content);
+			$("#loader").fadeOut("fast");
+			NProgress.done();
+			aj = null;
+		});
+		setTimeout(function() {
+			if (aj) {
+				aj.abort();
+				$('#timeout').modal('show');
+				$("#loader").fadeOut("fast");
+				NProgress.done();
+				aj = null;
+			}
+		}, 10000);
 	}
 
 	/**
