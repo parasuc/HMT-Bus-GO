@@ -10,7 +10,7 @@
 
 $this->Template->setPageTitle('站点详情');
 
-if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+if (!isset($_GET['id']) || !Verifier::isNumber($_GET['id'])) {
 	throw new Error('传入站点ID有误');
 	die();
 }
