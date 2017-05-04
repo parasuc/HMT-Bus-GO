@@ -253,16 +253,21 @@ class RealTimeBus extends Curl {
 		for ($a = 0; $a < count($this->computed); $a++) {
 			if ($this->computed[$a]['IS_ONLINE']) {
 				$devices['online'][] = array(
-					'title' => $this->computed[$a]['BUS_NUM'],
-					'position' => array($this->computed[$a]['POSITION_LNG'], $this->computed[$a]['POSITION_LAT'])
+					'busNum' => $this->computed[$a]['BUS_NUM'],
+					'position' => array($this->computed[$a]['POSITION_LNG'], $this->computed[$a]['POSITION_LAT']),
+					'line' => $this->computed[$a]['LINE_NAME'],
+					'currentStop' => $this->computed[$a]['CURRENT_STOP_NAME'],
+					'nextStop' => $this->computed[$a]['NEXT_STOP_NAME'],
+					'lastUpdate' => $this->computed[$a]['UPDATE_TIME']
 				);
 			}
 		}
 		for ($b = 0; $b < count($this->computed); $b++) {
 			if (!$this->computed[$b]['IS_ONLINE']) {
 				$devices['offline'][] = array(
-					'title' => $this->computed[$b]['BUS_NUM'],
-					'position' => array($this->computed[$b]['POSITION_LNG'], $this->computed[$b]['POSITION_LAT'])
+					'busNum' => $this->computed[$b]['BUS_NUM'],
+					'position' => array($this->computed[$b]['POSITION_LNG'], $this->computed[$b]['POSITION_LAT']),
+					'lastUpdate' => $this->computed[$b]['UPDATE_TIME']
 				);
 			}
 		}
