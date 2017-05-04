@@ -8,7 +8,7 @@
  *	@note 线路列表页
  */
 
-$this->Template->setPageTitle('校巴线路查询');
+$this->Template->setPageTitle('实时校巴查询');
 
 /* 加载线路数据 */
 $rows = $this->BusData->getLineList();
