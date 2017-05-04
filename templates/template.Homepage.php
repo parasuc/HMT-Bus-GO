@@ -117,6 +117,8 @@
 								<p>小程序在手机端体验更好</p>
 								<p>定位更精确</p>
 								<p><button id="toggle-wxss-qrcode" type="button" class="btn btn-warning" style="color: #993300;">点击获取小程序二维码</button></p>
+								<div class="wrap-s"></div>
+								<div class="wrap-s"></div>
 							</div>
 							<div class="col-sm-1 hidden-xs"></div>
 						</div>
@@ -167,12 +169,13 @@
 		<!-- /#loader -->
 
 		<!-- scripts -->
+		<script type="text/javascript">cacheTimeout = <?php print (RTB_CACHE_EXPIRES * 1000); ?>;</script>
 		<script src="<?php $this->sourceUrl('js/jquery.js'); ?>"></script>
 		<script src="<?php $this->sourceUrl('js/bootstrap.js'); ?>"></script>
 		<script src="<?php $this->sourceUrl('js/jqui.js'); ?>"></script>
 		<script src="<?php $this->sourceUrl('js/pjax.js'); ?>"></script>
 		<script src="<?php $this->sourceUrl('js/nprogress.js'); ?>"></script>
-		<script src="https://webapi.amap.com/maps?v=1.3&key=95a3e9c0b7e3422648da350e5227882e"></script>
+		<script src="//webapi.amap.com/maps?v=1.3&key=95a3e9c0b7e3422648da350e5227882e"></script>
 		<script src="<?php $this->sourceUrl('js/common.js'); ?>"></script>
 		<!-- /scripts -->
 	</body>
