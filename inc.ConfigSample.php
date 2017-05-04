@@ -28,7 +28,7 @@ define("DB_NAME", '');
 //实时校巴数据获取地址
 define("RTB_DATA_URL", 'https://hbus.scau.edu.cn/api/');
 //实时校巴数据缓存期限 (单位：秒)
-define("RTB_CACHE_EXPIRES", 15);
+define("RTB_CACHE_EXPIRES", 5);
 
 //##########################################//
 
