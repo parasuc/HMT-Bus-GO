@@ -1,7 +1,13 @@
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-1 hidden-xs"></div>
+					<div class="col-sm-10">
 				<div class="page-header">
-					<h3><span class="fa fa-bus"></span> 校巴线路查询</h3>
+					<h3><span class="fa fa-bus"></span> 实时校巴查询</h3>
 				</div>
-
+				<div class="alert alert-info">
+					<strong><span class="fa fa-exclamation-circle"></span> 注意！</strong> 部分车辆尚未安装GPS终端，或者GPS终端失灵，导致显示不出实时位置。所以实时位置仅供参考，一切以实际情况为准。
+				</div>
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="panel panel-success">
@@ -40,3 +46,7 @@
 						</div>
 					</div>
 				</div>
+					</div>
+					<div class="col-sm-1 hidden-xs"></div>
+				</div>
+			</div>

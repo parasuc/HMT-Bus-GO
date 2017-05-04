@@ -1,8 +1,21 @@
+			<div class="wrap"></div>
+			<div id="timeout" class="modal fade" tabindex="-1" role="dialog">
+				<div class="modal-dialog modal-sm" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">连接超时！</h4>
+						</div>
+						<div class="modal-body">
+							<p>可能是您的网络连接较慢，亦或者是服务端出现了故障。</p>
+							<p>您可以再一次刷新数据重试。</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-danger" data-dismiss="modal">我知道了</button>
+						</div>
+					</div>
 				</div>
-				<div class="col-sm-1 hidden-xs"></div>
 			</div>
 		</div>
-		<!-- /.container -->
 
 		<!-- .footer -->
 		<div class="footer">
@@ -38,6 +51,7 @@
 		<script src="<?php $this->sourceUrl('js/jqui.js'); ?>"></script>
 		<script src="<?php $this->sourceUrl('js/pjax.js'); ?>"></script>
 		<script src="<?php $this->sourceUrl('js/nprogress.js'); ?>"></script>
+		<script src="https://webapi.amap.com/maps?v=1.3&key=95a3e9c0b7e3422648da350e5227882e"></script>
 		<script src="<?php $this->sourceUrl('js/common.js'); ?>"></script>
 		<!-- /scripts -->
 	</body>

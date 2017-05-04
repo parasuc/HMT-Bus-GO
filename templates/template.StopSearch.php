@@ -1,3 +1,7 @@
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-1 hidden-xs"></div>
+					<div class="col-sm-10">
 				<div class="page-header">
 					<h3><span class="fa fa-bus"></span> 校巴站点检索</h3>
 				</div>
@@ -47,3 +51,7 @@
 					<?php endif; ?>
 					</div>
 				</div>
+					</div>
+					<div class="col-sm-1 hidden-xs"></div>
+				</div>
+			</div>
