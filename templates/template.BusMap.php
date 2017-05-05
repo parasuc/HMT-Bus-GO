@@ -1,5 +1,6 @@
 <div class="wrap"></div>
 <div class="container">
+	<a id="tomap"></a>
 	<div class="page-header">
 		<h3><span class="fa fa-map"></span> 校巴地图</h3>
 	</div>
@@ -27,7 +28,7 @@
 				</div>
 				<div class="list-group">
 				<?php foreach($this->data['polyline'] as $polyline): ?>
-					<a class="list-group-item get-polyline-link" id="<?php print $polyline['line_id']; ?>" href="javascript:;"><span class="fa fa-minus" style="color: <?php print $polyline['poly_color']; ?>;"></span>&nbsp;&nbsp;<?php print $polyline['line_name']; ?> [ <?php print $polyline['line_start']; ?> 开往 <?php print $polyline['line_end']; ?> ]</a>
+					<a class="list-group-item get-polyline-link" id="<?php print $polyline['line_id']; ?>" href="#tomap"><span class="fa fa-minus" style="color: <?php print $polyline['poly_color']; ?>;"></span>&nbsp;&nbsp;<?php print $polyline['line_name']; ?> [ <?php print $polyline['line_start']; ?> 开往 <?php print $polyline['line_end']; ?> ]</a>
 				<?php endforeach; ?>
 				</div>
 			</div>
