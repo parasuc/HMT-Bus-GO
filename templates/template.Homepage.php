@@ -59,7 +59,7 @@
 						<p>校巴信息实时更新，随时随地掌握校巴动态</p>
 						<p>让您更便捷地搭乘校巴</p>
 						<div class="wrap-s"></div>
-						<p><a href="./index.php?mod=lineindex" class="btn btn-lg btn-success"><span class="fa fa-play"></span> 开始使用！</a></p>
+						<p><a href="./index.php?mod=lineindex" class="btn btn-lg btn-success">&nbsp;<span class="fa fa-play"></span> 开始使用！</a></p>
 					</div>
 				</div>
 
