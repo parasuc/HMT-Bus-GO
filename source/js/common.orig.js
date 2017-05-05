@@ -221,6 +221,7 @@
 	 */
 
 	function refreshDevice() {
+		var timeout;
 		online = "";
 		offline = "";
 		ajax = $.get("./ajax/ajax.GetDevice.php", function(r) {
@@ -234,8 +235,9 @@
 			$("#offline-list").html(offline);
 			NProgress.done();
 			ajax = null;
+			clearTimeout(timeout);
 		});
-		setTimeout(function() {
+		timeout = setTimeout(function() {
 			if (ajax) {
 				ajax.abort();
 				ajax = null;
@@ -251,6 +253,7 @@
 	 */
 
 	function refreshStopList() {
+		var timeout;
 		stopList = "";
 		ajax = $.post("./ajax/ajax.GetStop.php", {lineId: lineId}, function(r) {
 			for (i = 0; i < r.length; i++) {
@@ -266,8 +269,9 @@
 			$("#loader").fadeOut("fast");
 			NProgress.done();
 			ajax = null;
+			clearTimeout(timeout);
 		});
-		setTimeout(function() {
+		timeout = setTimeout(function() {
 			if (ajax) {
 				ajax.abort();
 				ajax = null;
@@ -324,6 +328,7 @@
 	 */
 
 	function getBusLocation() {
+		var timeout;
 		var aj = $.get('./ajax/ajax.GetBusLocation.php', function(r) {
 			map.remove(busOnline);
 			map.remove(busOffline);
@@ -381,9 +386,10 @@
 				});
 			}
 			aj = null;
+			clearTimeout(timeout);
 		});
 
-		setTimeout(function() {
+		timeout = setTimeout(function() {
 			if (aj) {
 				aj.abort();
 				aj = null;
@@ -399,6 +405,7 @@
 	 */
 
 	function getStopLocation() {
+		var timeout;
 		var aj = $.get('./ajax/ajax.GetStopLocation.php', function(r) {
 			for (i = 0; i < r.length; i++) {
 				marker = new AMap.Marker({
@@ -414,8 +421,9 @@
 				});
 			}
 			aj = null;
+			clearTimeout(timeout);
 		});
-		setTimeout(function() {
+		timeout = setTimeout(function() {
 			if (aj) {
 				aj.abort();
 				aj = null;
@@ -435,6 +443,7 @@
 		if (polyline) {
 			polyline.setMap(null);
 		}
+		var timeout;
 		var aj = $.post('./ajax/ajax.GetPolyline.php', {id: lineId}, function(r) {
 			polyline = new AMap.Polyline({
 				path: r[0].poly_path,
@@ -446,8 +455,9 @@
 			});
 			polyline.setMap(map);
 			aj = null;
+			clearTimeout(timeout);
 		});
-		setTimeout(function() {
+		timeout = setTimeout(function() {
 			if (aj) {
 				aj.abort();
 				aj = null;
@@ -479,10 +489,10 @@
 	 */
 
 	function loadStopDetail(stopId) {
+		var timeout;
 		NProgress.start();
 		$("#loader").fadeIn("fast");
 		var aj = $.post('./ajax/ajax.GetStopDetail.php', {id: stopId}, function(r) {
-			console.log(r);
 			var stop = r.stop[0];
 			var lineList = r.lineList;
 			var title = '<span class="fa fa-map-marker"></span> ' + stop.stop_name;
@@ -496,8 +506,9 @@
 			$("#loader").fadeOut("fast");
 			NProgress.done();
 			aj = null;
+			clearTimeout(timeout);
 		});
-		setTimeout(function() {
+		timeout = setTimeout(function() {
 			if (aj) {
 				aj.abort();
 				$('#timeout').modal('show');
