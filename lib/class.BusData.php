@@ -219,7 +219,7 @@ class BusData extends DB {
 	 *	@return array
 	 */
 
-	public function getPolylineByLineId($lineId) {
+	public function getPolyline($lineId) {
 		if (!Verifier::isNumber($lineId)) {
 			throw new Error('传入线路ID有误');
 		}
@@ -241,13 +241,13 @@ class BusData extends DB {
 	}
 
 	/**
-	 *	通过线路ID获取该线路的路径
+	 *	通过线路ID获取该线路的路径（仅列表）
 	 *
 	 *	@param int $lineId [线路ID]
 	 *	@return array
 	 */
 
-	public function getPolyline() {
+	public function getPolylineList() {
 		parent::query("SELECT * FROM bus_polyline LEFT JOIN bus_line USING (line_id) ORDER BY line_id ASC;");
 		$rows = array();
 		$i = 0;
@@ -257,8 +257,7 @@ class BusData extends DB {
 				'line_name' => $row['line_name'],
 				'line_start' => $row['line_start'],
 				'line_end' => $row['line_end'],
-				'poly_color' => $row['poly_color'],
-				'poly_path' => json_decode($row['poly_path'], true)
+				'poly_color' => $row['poly_color']
 			);
 			$i++;
 		}
