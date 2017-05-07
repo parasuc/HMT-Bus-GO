@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 
 $id = $_POST['id'];
 
-$data = $SCAUBus->BusData->getPolylineByLineId($id);
+$data = $SCAUBus->BusData->getPolyline($id);
 
 print json_encode($data);
 
