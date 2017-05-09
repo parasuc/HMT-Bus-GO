@@ -90,6 +90,7 @@ body {
 
 .homepage-banner {
     background-color: #0099ff;
+    background-image: url('../img/banner.png');
     padding-top: 100px;
     padding-bottom: 100px;
     color: #fff;
