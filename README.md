@@ -4,6 +4,20 @@
 
 5.6或以上
 
+## 食用方式
+
+1. Clone repo || Download ZIP，然后把源代码上传到你的服务器上
+
+2. 把 `inc.ConfigSample.php` 复制一份，并重命名为 `inc.Config.php`
+
+3. 在 `inc.Config.php` 里填写你的服务器配置
+
+4. 转动命运之轮吧！
+
+## 需要注意的
+
+* 请勿作任何方式的版权更改！！！
+
 ## 开源协议
 
 MIT License
