@@ -140,6 +140,8 @@
 			autoRefreshStopList();
 		});
 		$('#toggle-timetable-weekday').on('click', function() {
+			$('#toggle-timetable-weekend').html('<span class="fa fa-expand"></span> 展开周末节假日时刻表');
+			$('#timetable-weekend').fadeOut('fast');
 			timetableWeekendFlag = 0;
 			$('#timetable-weekend').fadeOut('fast');
 			if (timetableWeekdayFlag) {
@@ -154,6 +156,8 @@
 			}
 		});
 		$('#toggle-timetable-weekend').on('click', function() {
+			$('#toggle-timetable-weekday').html('<span class="fa fa-expand"></span> 展开工作日时刻表');
+			$('#timetable-weekday').fadeOut('fast');
 			timetableWeekdayFlag = 0;
 			$('#timetable-weekday').fadeOut('fast');
 			if (timetableWeekendFlag) {
